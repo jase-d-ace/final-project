@@ -3,7 +3,8 @@ import axios from 'axios'
 
 class App extends Component {
   componentDidMount(){
-    axios.get('http://pokeapi.co/api/v2/pokemon/blaziken').then((response)=>{
+    let id = Math.floor(Math.random()* 721)
+    axios.get('http://pokeapi.co/api/v2/pokemon/'+id).then((response)=>{
       console.log(response.data)
     }).catch((error) =>{
       console.log('error', error)

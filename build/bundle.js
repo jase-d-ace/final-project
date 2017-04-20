@@ -9578,7 +9578,8 @@ var App = function (_Component) {
   _createClass(App, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _axios2.default.get('http://pokeapi.co/api/v2/pokemon/blaziken').then(function (response) {
+      var id = Math.floor(Math.random() * 721);
+      _axios2.default.get('http://pokeapi.co/api/v2/pokemon/' + id).then(function (response) {
         console.log(response.data);
       }).catch(function (error) {
         console.log('error', error);
