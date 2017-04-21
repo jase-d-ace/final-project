@@ -1,9 +1,23 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SignupForm from './SignupForm';
+import LoginForm from './LoginForm';
+import { Link } from 'react-router-dom';
+import Test from './Test'
 
 class App extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      currentUser: null,
+      loggedIn: false,
+      currentUserId: ''
+    }//end of state
+  }//end of constructor
+
   //this is gonna die soon.
+  //shift this functionality to a button to generate a pokemon.
   componentDidMount(){
     let id = Math.floor(Math.random()* 721)
     axios.get('http://pokeapi.co/api/v2/pokemon/'+id).then((response)=>{
@@ -12,12 +26,35 @@ class App extends Component {
       console.log('error', error)
     })//end of axios
   }//end of componentDidMount
+
+  setCurrentUser(user, id){
+    this.setState({
+      currentUser: user,
+      loggedIn: true,
+      currentUserId: id
+    })//end of setState
+  }//end of setCurrentUser
+
+  displayUser(){
+    if(this.state.currentUser){
+      return <p>Welcome, {this.state.currentUser} </p>
+    } else {
+      return <p>Sign in</p>
+    }
+  }
+
+
+
   render() {
+    console.log(this.state)
     return (
       <div className='main'>
-        <h1>bitches</h1>
-        <p>bitches bitches bitches bitches bitches</p>
-        <SignupForm />
+        {this.displayUser()}
+        <h1>Welcome to the Safari Zone!</h1>
+        <p>To be a master, you have to think like a master</p>
+        <Link to='/test'>Test Link</Link>
+        <SignupForm setCurrentUser={this.setCurrentUser.bind(this)}/>
+        <LoginForm setCurrentUser={this.setCurrentUser.bind(this)}/>
       </div>
     )//end of return
   }//end of render

@@ -27,6 +27,6 @@ class MonstersController < ApplicationController
     @pokemon = Monster.find(params[:id])
   end
   def poke_params
-    params.require(:monster).permit(:name, :sprite)
+    params.require(:monster).permit(:name, :sprite, :user_id)
   end
 end

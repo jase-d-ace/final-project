@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+
 class SignupForm extends Component {
+
   constructor(){
     super();
     this.state = {
@@ -39,6 +41,8 @@ class SignupForm extends Component {
         password_confirmation: this.state.passwordConfirmation
       }).then((response) =>{
         console.log("OK");
+        console.log(response)
+        this.props.setCurrentUser(this.state.email, response.data.data.id)
       }).catch((error)=>{
         console.log('Signup Error: ', error)
       })//end of axios call
