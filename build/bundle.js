@@ -9558,6 +9558,10 @@ var _axios = __webpack_require__(190);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _SignupForm = __webpack_require__(254);
+
+var _SignupForm2 = _interopRequireDefault(_SignupForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9577,14 +9581,17 @@ var App = function (_Component) {
 
   _createClass(App, [{
     key: 'componentDidMount',
+
+    //this is gonna die soon.
     value: function componentDidMount() {
       var id = Math.floor(Math.random() * 721);
       _axios2.default.get('http://pokeapi.co/api/v2/pokemon/' + id).then(function (response) {
         console.log(response.data);
       }).catch(function (error) {
         console.log('error', error);
-      });
-    }
+      }); //end of axios
+    } //end of componentDidMount
+
   }, {
     key: 'render',
     value: function render() {
@@ -9600,13 +9607,15 @@ var App = function (_Component) {
           'p',
           null,
           'bitches bitches bitches bitches bitches'
-        )
-      );
-    }
+        ),
+        _react2.default.createElement(_SignupForm2.default, null)
+      ); //end of return
+    } //end of render
+
   }]);
 
   return App;
-}(_react.Component);
+}(_react.Component); //end of class
 
 exports.default = App;
 
@@ -29413,6 +29422,125 @@ var valueEqual = function valueEqual(a, b) {
 };
 
 exports.default = valueEqual;
+
+/***/ }),
+/* 254 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(190);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SignupForm = function (_Component) {
+  _inherits(SignupForm, _Component);
+
+  function SignupForm() {
+    _classCallCheck(this, SignupForm);
+
+    var _this = _possibleConstructorReturn(this, (SignupForm.__proto__ || Object.getPrototypeOf(SignupForm)).call(this));
+
+    _this.state = {
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    }; //end of state
+    return _this;
+  } //end of constructor
+
+  _createClass(SignupForm, [{
+    key: 'handleEmailInput',
+    value: function handleEmailInput(e) {
+      this.setState({
+        email: e.target.value
+      }); //end of setState
+    } //end of handleEmailInput
+
+  }, {
+    key: 'handlePasswordInput',
+    value: function handlePasswordInput(e) {
+      this.setState({
+        password: e.target.value
+      }); //end of setState
+    } //end of handlePasswordInput
+
+  }, {
+    key: 'handleConfirmationInput',
+    value: function handleConfirmationInput(e) {
+      this.setState({
+        passwordConfirmation: e.target.value
+      }); //end of setState
+    } //end of handleConfirmationInput
+
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      if (this.state.password != this.state.passwordConfirmation) {
+        alert('Your Passwords Don\'t Match!');
+      } else {
+        _axios2.default.post('http://localhost:3000/auth', {
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.passwordConfirmation
+        }).then(function (response) {
+          console.log("OK");
+        }).catch(function (error) {
+          console.log('Signup Error: ', error);
+        }); //end of axios call
+      } //end of else
+    } //end of handleSubmit
+
+  }, {
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      return _react2.default.createElement(
+        'form',
+        { onSubmit: function onSubmit(e) {
+            return _this2.handleSubmit(e);
+          } },
+        _react2.default.createElement('input', { type: 'email', placeholder: 'Your email', onChange: function onChange(e) {
+            return _this2.handleEmailInput(e);
+          } }),
+        _react2.default.createElement('input', { type: 'password', placeholder: 'Your password', onChange: function onChange(e) {
+            return _this2.handlePasswordInput(e);
+          } }),
+        _react2.default.createElement('input', { type: 'password', placeholder: 'Confirm password', onChange: function onChange(e) {
+            return _this2.handleConfirmationInput(e);
+          } }),
+        _react2.default.createElement('input', { type: 'submit' })
+      ); //end of return
+    } //end of render
+
+  }]);
+
+  return SignupForm;
+}(_react.Component); //end of class
+
+
+exports.default = SignupForm;
 
 /***/ })
 /******/ ]);
