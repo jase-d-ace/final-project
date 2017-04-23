@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Auth from 'j-toker';
 
 class SignupForm extends Component {
+
 
   constructor(){
     super();
@@ -11,6 +13,12 @@ class SignupForm extends Component {
       passwordConfirmation: ''
     }//end of state
   }//end of constructor
+
+  componentDidMount(){
+    Auth.configure({
+      apiUrl: 'http://localhost:3000'
+    })
+  }
 
   handleEmailInput(e){
     this.setState({
@@ -35,14 +43,13 @@ class SignupForm extends Component {
     if (this.state.password != this.state.passwordConfirmation){
       alert('Your Passwords Don\'t Match!');
     } else {
-      axios.post('http://localhost:3000/auth',{
+      Auth.emailSignUp({
         email: this.state.email,
         password: this.state.password,
-        password_confirmation: this.state.passwordConfirmation
+        password_confirmation: this.state.passwordConfirmation,
       }).then((response) =>{
         console.log("OK");
         console.log(response)
-        this.props.setCurrentUser(this.state.email, response.data.data.id)
       }).catch((error)=>{
         console.log('Signup Error: ', error)
       })//end of axios call
@@ -55,6 +62,7 @@ class SignupForm extends Component {
         <input type='email' placeholder='Your email' onChange={(e)=>this.handleEmailInput(e)} />
         <input type='password' placeholder='Your password' onChange={(e)=>this.handlePasswordInput(e)} />
         <input type='password' placeholder='Confirm password' onChange={(e)=>this.handleConfirmationInput(e)} />
+
         <input type='submit' />
       </form>
     )//end of return

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import SignupForm from './SignupForm';
-import LoginForm from './LoginForm';
+import Auth from 'j-toker'
 import { Link } from 'react-router-dom';
-import Test from './Test'
+import Pokemon from './Pokemon';
+import Test from './Test';
 
 class App extends Component {
 
   constructor(){
+    console.log(Auth.user)
     super();
     this.state = {
       currentUser: null,
@@ -35,26 +36,14 @@ class App extends Component {
     })//end of setState
   }//end of setCurrentUser
 
-  displayUser(){
-    if(this.state.currentUser){
-      return <p>Welcome, {this.state.currentUser} </p>
-    } else {
-      return <p>Sign in</p>
-    }
-  }
-
-
-
   render() {
     console.log(this.state)
     return (
       <div className='main'>
-        {this.displayUser()}
         <h1>Welcome to the Safari Zone!</h1>
         <p>To be a master, you have to think like a master</p>
         <Link to='/test'>Test Link</Link>
-        <SignupForm setCurrentUser={this.setCurrentUser.bind(this)}/>
-        <LoginForm setCurrentUser={this.setCurrentUser.bind(this)}/>
+        <Link to='/pokemon'>Your Pokes</Link>
       </div>
     )//end of return
   }//end of render

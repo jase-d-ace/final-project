@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Auth from 'j-toker';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component{
+
+  componentDidMount(){
+    Auth.configure({
+      apiUrl: 'http://localhost:3000/'
+    })
+  }
 
   constructor(){
     super();
@@ -25,14 +33,12 @@ class LoginForm extends Component{
 
   handleSubmit(e){
     e.preventDefault();
-    axios.post('http://localhost:3000/auth/sign_in', {
-      credentials: 'include',
+    Auth.emailSignIn({
       email: this.state.email,
       password: this.state.password
     }).then((response) =>{
-      console.log('signed in')
-      console.log(response)
-      this.props.setCurrentUser(response.data.data.email, response.data.data.id)
+      console.log('signed in');
+      this.props.history.push('/home')
     }).catch((error)=>{
       console.log('Sign In error: ', error)
     })
@@ -40,11 +46,16 @@ class LoginForm extends Component{
 
   render(){
     return(
+      <div className='landing-page'>
+        <Link to='/signup'>Sign Up</Link>
       <form onSubmit={(e)=>this.handleSubmit(e)}>
-        <input type='email' onChange={(e)=>this.handleEmailInput(e)} />
-        <input type='password' onChange={(e)=>this.handlePasswordInput(e)} />
+        <label>Email</label>
+        <input type='email' placeholder='Email' onChange={(e)=>this.handleEmailInput(e)} />
+        <label>Password</label>
+        <input type='password' placeholder='Password' onChange={(e)=>this.handlePasswordInput(e)} />
         <input type='submit' />
       </form>
+    </div>
     )//end of return
   }//end of render
 

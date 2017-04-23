@@ -20,8 +20,15 @@
   "homepage": "https://github.com/jase-d-ace/final-project#readme",
   "dependencies": {
     "axios": "^0.16.1",
+    "bcrypt": "^1.0.2",
+    "body-parser": "^1.17.1",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
     "express": "^4.15.2",
+    "express-session": "^1.15.2",
+    "j-toker": "0.0.10-beta3",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1"
