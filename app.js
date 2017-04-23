@@ -45,6 +45,20 @@ passport.deserializeUser((user, done)=>{
   done(null, user)
 })
 //Passport Strats
+//signup strat
+passport.use('local-signup', new localStrat({
+    usernameField: 'user[username]'
+    , passwordField: 'user[password]'
+    , passReqToCallback: true
+}, (req, username, password, done) => {
+    person.create(req.body.user).then((user) => {
+        return done(null, user);
+    }).catch((error) => {
+        console.log('User Creation Error: ', error);
+        return done(null, false);
+    });
+}));
+//login strat
 passport.use('local-login', new localStrat({
     usernameField: 'user[username]'
     , passwordField: 'user[password]'

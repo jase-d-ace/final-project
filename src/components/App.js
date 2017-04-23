@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Auth from 'j-toker'
 import { Link } from 'react-router-dom';
 import Pokemon from './Pokemon';
 import Test from './Test';
@@ -8,7 +7,6 @@ import Test from './Test';
 class App extends Component {
 
   constructor(){
-    console.log(Auth.user)
     super();
     this.state = {
       currentUser: null,

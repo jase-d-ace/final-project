@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Auth from 'j-toker';
 
 //this shit works. Database is live, and rendering data. yay.
 
@@ -14,18 +13,7 @@ class Pokemon extends Component {
   }
 
   componentDidMount(){
-    Auth.configure({
-      apiUrl: 'http://localhost:3000'
-    })
-    Auth.validateToken()
-        .then((response)=>{
-          console.log('token validated')
-          console.log(response)
-        }).catch((error)=>{
-          console.log('auth error: ', error)
-        })
-    axios.get('http://localhost:3000/monsters').then((response) =>{
-      console.log(Auth.user)
+    axios.get('/pokemon').then((response) =>{
       this.setState({
         pokemon: response.data
       });
@@ -35,9 +23,11 @@ class Pokemon extends Component {
   }
 
   signOut(){
-    Auth.signOut();
-    console.log('signed out')
-    this.props.history.push('/')
+    axios.get('http://localhost:8080/users/logout').then((data) =>{
+      this.props.history.push('/')
+    }).catch((error) =>{
+      console.log('Logout error', error)
+    })
   }
 
   renderPoke(){

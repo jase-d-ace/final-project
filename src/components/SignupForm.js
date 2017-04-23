@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Auth from 'j-toker';
 
 class SignupForm extends Component {
 
@@ -14,13 +13,7 @@ class SignupForm extends Component {
     }//end of state
   }//end of constructor
 
-  componentDidMount(){
-    Auth.configure({
-      apiUrl: 'http://localhost:3000'
-    })
-  }
-
-  handleEmailInput(e){
+  handleUsernameInput(e){
     this.setState({
       email: e.target.value
     })//end of setState
@@ -38,32 +31,14 @@ class SignupForm extends Component {
     })//end of setState
   }//end of handleConfirmationInput
 
-  handleSubmit(e){
-    e.preventDefault();
-    if (this.state.password != this.state.passwordConfirmation){
-      alert('Your Passwords Don\'t Match!');
-    } else {
-      Auth.emailSignUp({
-        email: this.state.email,
-        password: this.state.password,
-        password_confirmation: this.state.passwordConfirmation,
-      }).then((response) =>{
-        console.log("OK");
-        console.log(response)
-      }).catch((error)=>{
-        console.log('Signup Error: ', error)
-      })//end of axios call
-    } //end of else
-  } //end of handleSubmit
+  
 
   render(){
     return(
-      <form onSubmit={(e)=>this.handleSubmit(e)}>
-        <input type='email' placeholder='Your email' onChange={(e)=>this.handleEmailInput(e)} />
-        <input type='password' placeholder='Your password' onChange={(e)=>this.handlePasswordInput(e)} />
-        <input type='password' placeholder='Confirm password' onChange={(e)=>this.handleConfirmationInput(e)} />
-
-        <input type='submit' />
+      <form action='/users' method='POST'>
+        <input type='text' placeholder='Username' onChange={(e)=>this.handleUsernameInput(e)} id="username" name='user[username]' />
+        <input type='password' id='password' name='user[password]' placeholder='Your password' onChange={(e)=>this.handlePasswordInput(e)} />
+        <input type='submit' value="Sign Up" />
       </form>
     )//end of return
   }//end of render
