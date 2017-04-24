@@ -1,21 +1,12 @@
 const person = require('../../models/user');
+const controller = require('./controller')
 const router = require('express').Router();
 const path = require('path');
 const passport = require('passport');
 const AuthService = require('../../services/auth');
-router.get('/', (req, res) =>{
-  person.findByUsername(req.user.username).then((data) =>{
-    res.json(data)
-  }).catch((error) =>{
-    console.log('USER API ERROR:', error)
-  })
-});
-router.post('/', passport.authenticate('local-signup'), (req, res) =>{
-  console.log(req.user)
-  res.redirect('/home')
-});
-router.post('/login', passport.authenticate('local-login'), (req, res)=>{
-  console.log(req.user)
-  res.redirect('/home')
-});
+router.get('/', controller.find);
+router.get('/logout', controller.logout)
+router.post('/', passport.authenticate('local-signup'), controller.signup);
+router.post('/login', passport.authenticate('local-login'), controller.login);
+router.put('/:id', controller.update);
 module.exports = router;

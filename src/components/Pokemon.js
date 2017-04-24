@@ -22,6 +22,16 @@ class Pokemon extends Component {
     })
   }
 
+  logOut(){
+    axios.get('/users/logout').then((response) =>{
+      const self = this
+      console.log('successfully signed out')
+      self.props.history.push('/');
+    }).catch((error)=>{
+      console.log('logout error: ', error)
+    })
+  }
+
   renderPoke(){
     if (this.state.pokemon){
       if (this.state.pokemon.length >= 1){
@@ -43,11 +53,11 @@ class Pokemon extends Component {
   }
 
   render(){
-    console.log(this.state)
+    console.log(this.props)
     return(
       <div className='pokemon-container'>
       {this.renderPoke()}
-      <Link to='/'>Log Out</Link>
+      <button onClick={() => this.logOut()}>Log Out</button>
     </div>
     )
   }

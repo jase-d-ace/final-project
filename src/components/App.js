@@ -6,19 +6,7 @@ import Test from './Test';
 
 class App extends Component {
 
-  //this is gonna die soon.
-  //shift this functionality to a button to generate a pokemon.
-  componentDidMount(){
-    let id = Math.floor(Math.random()* 721)
-    axios.get('http://pokeapi.co/api/v2/pokemon/'+id).then((response)=>{
-      console.log(response.data)
-    }).catch((error) =>{
-      console.log('error', error)
-    })//end of axios
-  }//end of componentDidMount
-
   render() {
-    console.log(this.state)
     return (
       <div className='main'>
         <h1>Welcome to the Safari Zone!</h1>

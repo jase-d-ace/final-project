@@ -29,7 +29,7 @@ class LoginForm extends Component{
       <div className='landing-page'>
         <Link to='/signup'>Sign Up</Link>
       <form action='/users/login' method='POST'>
-        <label>Email</label>
+        <label>Username</label>
         <input placeholder='username' name='user[username]' onChange={(e)=>this.handleUsernameInput(e)} />
         <label>Password</label>
         <input type='password' name='user[password]' placeholder='Password' onChange={(e)=>this.handlePasswordInput(e)} />
