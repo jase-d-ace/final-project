@@ -28,6 +28,7 @@ class LoginForm extends Component{
     return(
       <div className='landing-page'>
         <Link to='/signup'>Sign Up</Link>
+        <h1>Welcome to the Safari Zone!</h1>
       <form action='/users/login' method='POST'>
         <label>Username</label>
         <input placeholder='username' name='user[username]' onChange={(e)=>this.handleUsernameInput(e)} />

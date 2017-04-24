@@ -23,7 +23,7 @@ controller.signup = (req, res) =>{
 }
 
 controller.update = (req, res) =>{
-  person.update(req.body.pokeballs, req.body.greatballs, req.body.ultraballs, req.body.cash, req.user.id).then((data) =>{
+  trainer.update(req.body.pokeballs, req.body.greatballs, req.body.ultraballs, req.body.cash, req.user.id).then((data) =>{
     res.json(data)
   }).catch((error)=>{
     console.log('USER UPDATE ERROR:', error)

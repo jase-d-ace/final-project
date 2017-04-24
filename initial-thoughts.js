@@ -2,9 +2,9 @@
 // Safari Zone
 
 // catch rate is based on randomness and the pokeball you use
-// Poke Ball catchFactor = Math.floor(Math.random()*0.15)
-// Great Ball catchFactor = Math.floor(Math.random()*0.25)
-// Ultra Ball catchFactor = Math.floor(Math.random()*0.55)
+// Poke Ball catchFactor = Math.floor(Math.random()*0.45)
+// Great Ball catchFactor = Math.floor(Math.random()*0.65)
+// Ultra Ball catchFactor = Math.floor(Math.random()*0.75)
 // Master Ball catchFactor = 1
 
 // catchRate = Math.floor(catchFactor * 100)

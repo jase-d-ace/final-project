@@ -11,6 +11,6 @@ user.findByUsername = (username) => {
     return db.one(`SELECT * FROM users WHERE username = $1`, [username])
 };
 user.update = (pokeballs, greatballs, ultraballs, cash, id) =>{
-  return db.one('UPDATE users SET pokeballs = pokeballs + $1, greatballs = greatballs + $2, ultraballs = ultraballs + $3, cash = cash - $4 returning id', [pokeballs, greatballs, ultraballs, cash])
+  return db.one('UPDATE users SET pokeballs = pokeballs + $1, greatballs = greatballs + $2, ultraballs = ultraballs + $3, cash = cash - $4 WHERE id = $5 returning id', [pokeballs, greatballs, ultraballs, cash, id])
 }
 module.exports = user;

@@ -53,7 +53,7 @@ class Shop extends Component{
 
   buy(e){
     e.preventDefault();
-    let total = ((this.state.pokeballs*200)+(this.state.greatballs*600)+(this.state.ultraballs*1200));
+    let total = ((this.state.pokeballsInCart*200)+(this.state.greatballsInCart*600)+(this.state.ultraballsInCart*1200));
     console.log('total purchase')
     console.log(total)
     console.log('net')

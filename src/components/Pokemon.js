@@ -22,16 +22,6 @@ class Pokemon extends Component {
     })
   }
 
-  logOut(){
-    axios.get('/users/logout').then((response) =>{
-      const self = this
-      console.log('successfully signed out')
-      self.props.history.push('/');
-    }).catch((error)=>{
-      console.log('logout error: ', error)
-    })
-  }
-
   renderPoke(){
     if (this.state.pokemon){
       if (this.state.pokemon.length >= 1){
@@ -48,16 +38,14 @@ class Pokemon extends Component {
         return <h1>You have no pokemon! Go out and catch some!</h1>
       }
     } else {
-      return <h1>Nothing here</h1>
+      return <h1>How did you get here without logging in?!</h1>
     }
   }
 
   render(){
-    console.log(this.props)
     return(
       <div className='pokemon-container'>
       {this.renderPoke()}
-      <button onClick={() => this.logOut()}>Log Out</button>
     </div>
     )
   }

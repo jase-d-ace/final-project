@@ -1,4 +1,3 @@
-const person = require('../../models/user');
 const controller = require('./controller')
 const router = require('express').Router();
 const path = require('path');

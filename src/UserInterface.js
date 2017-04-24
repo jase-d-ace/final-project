@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import App from './components/App';
 import Battle from './components/Battle';
-import Pokemon from './components/Pokemon'
+import Pokemon from './components/Pokemon';
 
 class UI extends Component{
   constructor(){
@@ -39,12 +39,13 @@ renderUserInfo(){
     return (
       <div className='hud-details'>
       <span>Welcome, {this.state.username}</span>
-      <ul>Your Items:
-        <li>&#8381;{this.state.cash}</li>
-        <li>Poke Balls: {this.state.pokeballs}</li>
-        <li>Great Balls: {this.state.greatballs}</li>
-        <li>Ultra Balls: {this.state.ultraballs}</li>
-      </ul>
+      <nav className='nav-bar'>
+        <li><Link to='/home'>Home</Link></li>
+        <li><Link to='/battle' >Find Pokes</Link></li>
+        <li><Link to='/pokemon'>Your Pokes</Link></li>
+        <li><Link to='/shop'>Shop</Link></li>
+
+      </nav>
     </div>
     )
   } else {
@@ -58,11 +59,6 @@ render(){
   return(
     <div className='hud'>
       {this.renderUserInfo()}
-    <nav className='nav-bar'>
-      <li><Link to='/home'>Home</Link></li>
-      <li><Link to='/battle' >Find Pokes</Link></li>
-      <li><Link to='/pokemon'>Your Pokes</Link></li>
-    </nav>
   </div>
     )
   }

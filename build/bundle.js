@@ -9586,11 +9586,33 @@ var App = function (_Component) {
   }
 
   _createClass(App, [{
+    key: 'logOut',
+    value: function logOut() {
+      var _this2 = this;
+
+      _axios2.default.get('/users/logout').then(function (response) {
+        var self = _this2;
+        console.log('successfully signed out');
+        self.props.history.push('/');
+      }).catch(function (error) {
+        console.log('logout error: ', error);
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this3 = this;
+
       return _react2.default.createElement(
         'div',
         { className: 'main' },
+        _react2.default.createElement(
+          'button',
+          { onClick: function onClick() {
+              return _this3.logOut();
+            } },
+          'Log Out'
+        ),
         _react2.default.createElement(
           'h1',
           null,
@@ -29628,6 +29650,11 @@ var LoginForm = function (_Component) {
           'Sign Up'
         ),
         _react2.default.createElement(
+          'h1',
+          null,
+          'Welcome to the Safari Zone!'
+        ),
+        _react2.default.createElement(
           'form',
           { action: '/users/login', method: 'POST' },
           _react2.default.createElement(
@@ -29770,19 +29797,6 @@ var Pokemon = function (_Component) {
       });
     }
   }, {
-    key: 'logOut',
-    value: function logOut() {
-      var _this3 = this;
-
-      _axios2.default.get('/users/logout').then(function (response) {
-        var self = _this3;
-        console.log('successfully signed out');
-        self.props.history.push('/');
-      }).catch(function (error) {
-        console.log('logout error: ', error);
-      });
-    }
-  }, {
     key: 'renderPoke',
     value: function renderPoke() {
       if (this.state.pokemon) {
@@ -29815,27 +29829,17 @@ var Pokemon = function (_Component) {
         return _react2.default.createElement(
           'h1',
           null,
-          'Nothing here'
+          'How did you get here without logging in?!'
         );
       }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
-
-      console.log(this.props);
       return _react2.default.createElement(
         'div',
         { className: 'pokemon-container' },
-        this.renderPoke(),
-        _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return _this4.logOut();
-            } },
-          'Log Out'
-        )
+        this.renderPoke()
       );
     }
   }]);
@@ -29948,7 +29952,7 @@ var Shop = function (_Component) {
       var _this3 = this;
 
       e.preventDefault();
-      var total = this.state.pokeballs * 200 + this.state.greatballs * 600 + this.state.ultraballs * 1200;
+      var total = this.state.pokeballsInCart * 200 + this.state.greatballsInCart * 600 + this.state.ultraballsInCart * 1200;
       console.log('total purchase');
       console.log(total);
       console.log('net');
@@ -30145,32 +30149,43 @@ var UI = function (_Component) {
             this.state.username
           ),
           _react2.default.createElement(
-            'ul',
-            null,
-            'Your Items:',
+            'nav',
+            { className: 'nav-bar' },
             _react2.default.createElement(
               'li',
               null,
-              '\u20BD',
-              this.state.cash
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/home' },
+                'Home'
+              )
             ),
             _react2.default.createElement(
               'li',
               null,
-              'Poke Balls: ',
-              this.state.pokeballs
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/battle' },
+                'Find Pokes'
+              )
             ),
             _react2.default.createElement(
               'li',
               null,
-              'Great Balls: ',
-              this.state.greatballs
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/pokemon' },
+                'Your Pokes'
+              )
             ),
             _react2.default.createElement(
               'li',
               null,
-              'Ultra Balls: ',
-              this.state.ultraballs
+              _react2.default.createElement(
+                _reactRouterDom.Link,
+                { to: '/shop' },
+                'Shop'
+              )
             )
           )
         );
@@ -30188,38 +30203,7 @@ var UI = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'hud' },
-        this.renderUserInfo(),
-        _react2.default.createElement(
-          'nav',
-          { className: 'nav-bar' },
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/home' },
-              'Home'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/battle' },
-              'Find Pokes'
-            )
-          ),
-          _react2.default.createElement(
-            'li',
-            null,
-            _react2.default.createElement(
-              _reactRouterDom.Link,
-              { to: '/pokemon' },
-              'Your Pokes'
-            )
-          )
-        )
+        this.renderUserInfo()
       );
     }
   }]);
@@ -30250,6 +30234,8 @@ var _axios = __webpack_require__(190);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouterDom = __webpack_require__(242);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30267,21 +30253,42 @@ var Battle = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Battle.__proto__ || Object.getPrototypeOf(Battle)).call(this));
 
     _this.state = {
-      randomPoke: null
-    }; //end of this.state
-    return _this;
+      randomPoke: null,
+      trainer_id: null,
+      pokeballsInHand: 0,
+      greatballsInHand: 0,
+      ultraballsInHand: 0,
+      pokeballsThrown: 0,
+      greatballsThrown: 0,
+      ultraballsThrown: 0
+    };return _this;
   } //end of constructor
 
   _createClass(Battle, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios2.default.get('/users').then(function (response) {
+        var res = response.data;
+        console.log('got a user');
+        console.log(response.data);
+        _this2.setState({
+          trainer_id: res.id,
+          pokeballsInHand: res.pokeballs,
+          greatballsInHand: res.greatballs,
+          ultraballsInHand: res.ultraballs
+        });
+      });
+    }
+  }, {
     key: 'getRandomPoke',
     value: function getRandomPoke() {
-      var _this2 = this;
+      var _this3 = this;
 
       var randomPoke = Math.floor(Math.random() * 721);
       _axios2.default.get('http://pokeapi.co/api/v2/pokemon/' + randomPoke).then(function (response) {
-        console.log('got random poke');
-        console.log(response.data);
-        _this2.setPoke(response.data);
+        _this3.setPoke(response.data);
       }).catch(function (error) {
         console.log('Random pokemon error: ', error);
       });
@@ -30294,19 +30301,143 @@ var Battle = function (_Component) {
       });
     }
   }, {
-    key: 'tryToCatch',
-    value: function tryToCatch() {
-      //write up a chance function
-      //compare catchRate vs wildRate
-      //if catchRate > wildRate
-      //then it's caught and saved,
-      //and you lose your pokeball
-      //if not, you lose your pokeball and it continues
+    key: 'caught',
+    value: function caught() {
+      var _this4 = this;
+
+      //if your pokemon is caught
+      //run an axios call to put it in your database
+      //and another axios call to give you back about 1000 bucks
+      _axios2.default.post('/api', {
+        name: this.state.randomPoke.name,
+        sprite: this.state.randomPoke.sprites.front_default,
+        trainer_id: this.state.trainer_id
+      }).then(function (response) {
+        return _react2.default.createElement(
+          'p',
+          null,
+          'Congratulations!',
+          _this4.state.randomPoke.name,
+          ' was caught!'
+        );
+        _this4.props.history.push('/pokemon');
+      }).catch(function (error) {
+        console.log('axios post error: ', error);
+      });
+      //the logic has to be reversed here.
+      //the model only accepts additions to pokeballs, and subtractions to cash.
+      //since this logic lowers the balls and raises cash,
+      //you need to reverse everything and make them negative
+      _axios2.default.put('/users/' + this.state.trainer_id, {
+        cash: -1000
+      }).then(function (response) {
+        console.log('successful catch');
+      }).catch(function (error) {
+        console.log('catch error: ', error);
+      });
+    }
+  }, {
+    key: 'pokeCatch',
+    value: function pokeCatch() {
+      console.log('poke ball thrown');
+      var wildRate = Math.random() * 10;
+      var pokeCatchFactor = Math.random() * 0.65;
+      var pokeCatchRate = Math.random() * pokeCatchFactor * 10;
+      console.log('compare');
+      console.log(pokeCatchRate, wildRate);
+      if (this.state.pokeballsInHand != 0) {
+        this.setState(function (prevState) {
+          return {
+            pokeballsInHand: prevState.pokeballsInHand - 1,
+            pokeballsThrown: prevState.pokeballsThrown + 1
+          };
+        });
+        if (pokeCatchRate >= wildRate) {
+          this.caught();
+        } else {
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            pokeballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('knock-off error: ', error);
+          });
+          return _react2.default.createElement(
+            'h3',
+            null,
+            'Argh! Try again!'
+          );
+        }
+      } else {
+        alert('You have none left!');
+      }
+    }
+  }, {
+    key: 'greatCatch',
+    value: function greatCatch() {
+      console.log('Great Ball thrown');
+      var wildRate = Math.random() * 10;
+      var greatCatchFactor = Math.random * 0.75;
+      var greatCatchRate = Math.random * greatCatchFactor * 10;
+      console.log('compare');
+      console.log(greatCatchRate, wildRate);
+      if (this.state.greatballsInHand != 0) {
+        this.setState(function (prevState) {
+          return {
+            greatballsInHand: prevState.greatballsInHand - 1,
+            greatballsThrown: prevState.greatballsThrown + 1
+          };
+        });
+        if (greatCatchRate >= WildRate) {
+          this.caught();
+        } else {
+          return _react2.default.createElement(
+            'h3',
+            null,
+            'Argh! Try again!'
+          );
+        }
+      } else {
+        alert('You have none left!');
+      }
+    }
+  }, {
+    key: 'ultraCatch',
+    value: function ultraCatch() {
+      console.log('ultra ball thrown');
+      var randomize = function randomize(num) {
+        Math.ceil(Math.random() * num);
+      };
+      var wildRate = randomize(100);
+      var ultraCatchFactor = randomize(0.85);
+      var ultraCatchRate = randomize(ultraCatchFactor * 100);
+      console.log('compare:');
+      console.log(ultraCatchRate, wildRate);
+      if (this.state.ultraballsInHand != 0) {
+        this.setState(function (prevState) {
+          return {
+            ultraballsInHand: prevState.ultraballsInHand - 1,
+            ultraballsThrown: prevState.ultraballsThrown + 1
+          };
+        });
+        if (ultraCatchRate >= wildRate) {
+          this.caught();
+        } else {
+          return _react2.default.createElement(
+            'h3',
+            null,
+            'Argh! Try again!'
+          );
+        }
+      } else {
+        alert('You have none left!');
+      }
     }
   }, {
     key: 'renderWild',
     value: function renderWild() {
-      console.log('in renderWild');
+      var _this5 = this;
+
       if (this.state.randomPoke) {
         return _react2.default.createElement(
           'div',
@@ -30314,9 +30445,63 @@ var Battle = function (_Component) {
           _react2.default.createElement(
             'p',
             null,
+            this.state.pokeballsThrown,
+            ' Pokeballs Thrown'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.state.greatballsThrown,
+            ' Great Balls Thrown'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            this.state.ultraballsThrown,
+            ' Ultra Balls Thrown'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
             this.state.randomPoke.name
           ),
-          _react2.default.createElement('img', { src: this.state.randomPoke.sprites.front_default })
+          _react2.default.createElement('img', { src: this.state.randomPoke.sprites.front_default }),
+          _react2.default.createElement(
+            'div',
+            { className: 'battle-hud' },
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this5.pokeCatch();
+                } },
+              'Throw a Pokeball?(',
+              this.state.pokeballsInHand,
+              ' left)'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this5.greatCatch();
+                } },
+              'Throw a Great Ball? (',
+              this.state.greatballsInHand,
+              ' left)'
+            ),
+            _react2.default.createElement(
+              'button',
+              { onClick: function onClick() {
+                  return _this5.ultraCatch();
+                } },
+              'Throw an Ultra Ball? (',
+              this.state.ultraballsInHand,
+              ' left)'
+            ),
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { to: '/home' },
+              'Run!'
+            )
+          )
         );
       } else {
         return _react2.default.createElement(
@@ -30329,10 +30514,8 @@ var Battle = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this6 = this;
 
-      console.log('rendered battle');
-      console.log(this.state);
       return _react2.default.createElement(
         'div',
         { className: 'battle-screen' },
@@ -30344,7 +30527,7 @@ var Battle = function (_Component) {
         _react2.default.createElement(
           'button',
           { onClick: function onClick() {
-              return _this3.getRandomPoke();
+              return _this6.getRandomPoke();
             } },
           'Find!'
         ),
