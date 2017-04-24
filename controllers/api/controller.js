@@ -21,6 +21,7 @@ controller.create = (req, res) =>{
   pokemon.create(req.body.name, req.body.sprite, req.user.id).then((data) =>{
     console.log('Pokemon Created!');
     console.log(data);
+    res.json(data)
   }).catch((error)=>{
     console.log('API CREATE ERROR: ', error)
   });

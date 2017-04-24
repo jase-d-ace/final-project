@@ -30261,7 +30261,8 @@ var Battle = function (_Component) {
       pokeballsThrown: 0,
       greatballsThrown: 0,
       ultraballsThrown: 0
-    };return _this;
+    }; //end of this.state
+    return _this;
   } //end of constructor
 
   _createClass(Battle, [{
@@ -30313,13 +30314,6 @@ var Battle = function (_Component) {
         sprite: this.state.randomPoke.sprites.front_default,
         trainer_id: this.state.trainer_id
       }).then(function (response) {
-        return _react2.default.createElement(
-          'p',
-          null,
-          'Congratulations!',
-          _this4.state.randomPoke.name,
-          ' was caught!'
-        );
         _this4.props.history.push('/pokemon');
       }).catch(function (error) {
         console.log('axios post error: ', error);
@@ -30329,7 +30323,11 @@ var Battle = function (_Component) {
       //since this logic lowers the balls and raises cash,
       //you need to reverse everything and make them negative
       _axios2.default.put('/users/' + this.state.trainer_id, {
-        cash: -1000
+        cash: -1000,
+        pokeballs: 0,
+        ultraballs: 0,
+        greatballs: 0,
+        masterballs: 0
       }).then(function (response) {
         console.log('successful catch');
       }).catch(function (error) {
@@ -30342,7 +30340,7 @@ var Battle = function (_Component) {
       console.log('poke ball thrown');
       var wildRate = Math.random() * 10;
       var pokeCatchFactor = Math.random() * 0.65;
-      var pokeCatchRate = Math.random() * pokeCatchFactor * 10;
+      var pokeCatchRate = pokeCatchFactor * 10;
       console.log('compare');
       console.log(pokeCatchRate, wildRate);
       if (this.state.pokeballsInHand != 0) {
@@ -30354,13 +30352,28 @@ var Battle = function (_Component) {
         });
         if (pokeCatchRate >= wildRate) {
           this.caught();
-        } else {
           _axios2.default.put('/users/' + this.state.trainer_id, {
+            cash: 0,
+            greatballs: 0,
+            ultraballs: 0,
+            masterballs: 0,
             pokeballs: -1
           }).then(function (response) {
             console.log('successfully knocked off a ball');
           }).catch(function (error) {
-            console.log('knock-off error: ', error);
+            console.log('pokeball knock-off error: ', error);
+          });
+        } else {
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            cash: 0,
+            greatballs: 0,
+            ultraballs: 0,
+            masterballs: 0,
+            pokeballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('pokeball knock-off error: ', error);
           });
           return _react2.default.createElement(
             'h3',
@@ -30377,8 +30390,8 @@ var Battle = function (_Component) {
     value: function greatCatch() {
       console.log('Great Ball thrown');
       var wildRate = Math.random() * 10;
-      var greatCatchFactor = Math.random * 0.75;
-      var greatCatchRate = Math.random * greatCatchFactor * 10;
+      var greatCatchFactor = Math.random() * 0.75;
+      var greatCatchRate = greatCatchFactor * 10;
       console.log('compare');
       console.log(greatCatchRate, wildRate);
       if (this.state.greatballsInHand != 0) {
@@ -30388,14 +30401,32 @@ var Battle = function (_Component) {
             greatballsThrown: prevState.greatballsThrown + 1
           };
         });
-        if (greatCatchRate >= WildRate) {
+        if (greatCatchRate >= wildRate) {
           this.caught();
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            pokeballs: 0,
+            cash: 0,
+            ultraballs: 0,
+            masterballs: 0,
+            greatballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('greatball knock-off error:', error);
+          });
         } else {
-          return _react2.default.createElement(
-            'h3',
-            null,
-            'Argh! Try again!'
-          );
+          console.log('no! we missed it!');
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            pokeballs: 0,
+            cash: 0,
+            ultraballs: 0,
+            masterballs: 0,
+            greatballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('greatball knock-off error:', error);
+          });
         }
       } else {
         alert('You have none left!');
@@ -30405,12 +30436,9 @@ var Battle = function (_Component) {
     key: 'ultraCatch',
     value: function ultraCatch() {
       console.log('ultra ball thrown');
-      var randomize = function randomize(num) {
-        Math.ceil(Math.random() * num);
-      };
-      var wildRate = randomize(100);
-      var ultraCatchFactor = randomize(0.85);
-      var ultraCatchRate = randomize(ultraCatchFactor * 100);
+      var wildRate = Math.random() * 10;
+      var ultraCatchFactor = Math.random() * 0.85;
+      var ultraCatchRate = ultraCatchFactor * 10;
       console.log('compare:');
       console.log(ultraCatchRate, wildRate);
       if (this.state.ultraballsInHand != 0) {
@@ -30422,7 +30450,29 @@ var Battle = function (_Component) {
         });
         if (ultraCatchRate >= wildRate) {
           this.caught();
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            cash: 0,
+            pokeballs: 0,
+            greatballs: 0,
+            masterballs: 0,
+            ultraballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('ultraball knock-off error:', error);
+          });
         } else {
+          _axios2.default.put('/users/' + this.state.trainer_id, {
+            cash: 0,
+            pokeballs: 0,
+            greatballs: 0,
+            masterballs: 0,
+            ultraballs: -1
+          }).then(function (response) {
+            console.log('successfully knocked off a ball');
+          }).catch(function (error) {
+            console.log('ultraball knock-off error:', error);
+          });
           return _react2.default.createElement(
             'h3',
             null,

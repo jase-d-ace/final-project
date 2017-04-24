@@ -15,10 +15,6 @@ class Battle extends Component {
       pokeballsThrown: 0,
       greatballsThrown: 0,
       ultraballsThrown: 0,
-      //we'll need a pokeball count here
-      //pokeballs on hand, and pokeballs spent
-      //this will have to be set to 0 and become a negative number.
-      //also we'll need to store user id here
     }//end of this.state
   }//end of constructor
 
@@ -61,7 +57,6 @@ class Battle extends Component {
       sprite: this.state.randomPoke.sprites.front_default,
       trainer_id: this.state.trainer_id
     }).then((response) =>{
-      return <p>Congratulations!{this.state.randomPoke.name} was caught!</p>
       this.props.history.push('/pokemon')
     }).catch((error)=>{
       console.log('axios post error: ', error)
@@ -71,7 +66,11 @@ class Battle extends Component {
     //since this logic lowers the balls and raises cash,
     //you need to reverse everything and make them negative
     axios.put('/users/'+this.state.trainer_id,{
-      cash: -1000
+      cash: (-1000),
+      pokeballs: 0,
+      ultraballs: 0,
+      greatballs: 0,
+      masterballs: 0
     }).then((response) =>{
       console.log('successful catch')
     }).catch((error) =>{
@@ -83,7 +82,7 @@ class Battle extends Component {
     console.log('poke ball thrown')
     let wildRate = Math.random()*10;
     let pokeCatchFactor = Math.random()*0.65;
-    let pokeCatchRate = Math.random()*pokeCatchFactor*10;
+    let pokeCatchRate = pokeCatchFactor*10;
     console.log('compare');
     console.log(pokeCatchRate, wildRate)
     if (this.state.pokeballsInHand != 0){
@@ -95,13 +94,28 @@ class Battle extends Component {
       })
       if (pokeCatchRate>=wildRate){
         this.caught()
-      } else {
         axios.put('/users/'+this.state.trainer_id, {
-          pokeballs: -1
+          cash: 0,
+          greatballs: 0,
+          ultraballs: 0,
+          masterballs: 0,
+          pokeballs: (-1)
         }).then((response)=>{
           console.log('successfully knocked off a ball')
         }).catch((error)=>{
-          console.log('knock-off error: ', error)
+          console.log('pokeball knock-off error: ', error)
+        })
+      } else {
+        axios.put('/users/'+this.state.trainer_id, {
+          cash: 0,
+          greatballs: 0,
+          ultraballs: 0,
+          masterballs: 0,
+          pokeballs: (-1)
+        }).then((response)=>{
+          console.log('successfully knocked off a ball')
+        }).catch((error)=>{
+          console.log('pokeball knock-off error: ', error)
         })
         return <h3>Argh! Try again!</h3>
       }
@@ -113,8 +127,8 @@ class Battle extends Component {
   greatCatch(){
     console.log('Great Ball thrown')
     let wildRate = Math.random()*10;
-    let greatCatchFactor = Math.random*0.75;
-    let greatCatchRate = Math.random*greatCatchFactor*10;
+    let greatCatchFactor = Math.random()*0.75;
+    let greatCatchRate = greatCatchFactor*10;
     console.log('compare')
     console.log(greatCatchRate, wildRate)
     if (this.state.greatballsInHand != 0){
@@ -124,10 +138,32 @@ class Battle extends Component {
           greatballsThrown: prevState.greatballsThrown + 1
         }
       })
-      if(greatCatchRate>=WildRate){
+      if(greatCatchRate>=wildRate){
         this.caught()
+        axios.put('/users/'+this.state.trainer_id,{
+          pokeballs: 0,
+          cash: 0,
+          ultraballs: 0,
+          masterballs: 0,
+          greatballs: (-1)
+        }).then((response)=>{
+          console.log('successfully knocked off a ball');
+        }).catch((error)=>{
+          console.log('greatball knock-off error:', error)
+        })
       } else {
-        return <h3>Argh! Try again!</h3>
+        console.log('no! we missed it!')
+        axios.put('/users/'+this.state.trainer_id,{
+          pokeballs: 0,
+          cash: 0,
+          ultraballs: 0,
+          masterballs: 0,
+          greatballs: (-1)
+        }).then((response)=>{
+          console.log('successfully knocked off a ball');
+        }).catch((error)=>{
+          console.log('greatball knock-off error:', error)
+        })
       }
     } else {
       alert('You have none left!')
@@ -136,12 +172,9 @@ class Battle extends Component {
 
   ultraCatch(){
     console.log('ultra ball thrown')
-    const randomize = (num) =>{
-      Math.ceil(Math.random()*num);
-    };
-    let wildRate = randomize(100);
-    let ultraCatchFactor = randomize(0.85);
-    let ultraCatchRate = randomize((ultraCatchFactor*100));
+    let wildRate = Math.random()*10;
+    let ultraCatchFactor = Math.random()*0.85;
+    let ultraCatchRate = ultraCatchFactor*10;
     console.log('compare:')
     console.log(ultraCatchRate, wildRate)
     if (this.state.ultraballsInHand !=0) {
@@ -153,7 +186,29 @@ class Battle extends Component {
       })
       if (ultraCatchRate >= wildRate){
         this.caught()
+        axios.put('/users/'+this.state.trainer_id,{
+          cash: 0,
+          pokeballs: 0,
+          greatballs: 0,
+          masterballs: 0,
+          ultraballs: (-1)
+        }).then((response)=>{
+          console.log('successfully knocked off a ball');
+        }).catch((error)=>{
+          console.log('ultraball knock-off error:', error)
+        })
       } else {
+        axios.put('/users/'+this.state.trainer_id,{
+          cash: 0,
+          pokeballs: 0,
+          greatballs: 0,
+          masterballs: 0,
+          ultraballs: (-1)
+        }).then((response)=>{
+          console.log('successfully knocked off a ball');
+        }).catch((error)=>{
+          console.log('ultraball knock-off error:', error)
+        })
         return <h3>Argh! Try again!</h3>
       }
     } else {
