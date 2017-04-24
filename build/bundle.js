@@ -9582,22 +9582,15 @@ var App = function (_Component) {
   function App() {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
-
-    _this.state = {
-      currentUser: null,
-      loggedIn: false,
-      currentUserId: ''
-    }; //end of state
-    return _this;
-  } //end of constructor
-
-  //this is gonna die soon.
-  //shift this functionality to a button to generate a pokemon.
-
+    return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+  }
 
   _createClass(App, [{
     key: 'componentDidMount',
+
+
+    //this is gonna die soon.
+    //shift this functionality to a button to generate a pokemon.
     value: function componentDidMount() {
       var id = Math.floor(Math.random() * 721);
       _axios2.default.get('http://pokeapi.co/api/v2/pokemon/' + id).then(function (response) {
@@ -9606,16 +9599,6 @@ var App = function (_Component) {
         console.log('error', error);
       }); //end of axios
     } //end of componentDidMount
-
-  }, {
-    key: 'setCurrentUser',
-    value: function setCurrentUser(user, id) {
-      this.setState({
-        currentUser: user,
-        loggedIn: true,
-        currentUserId: id
-      }); //end of setState
-    } //end of setCurrentUser
 
   }, {
     key: 'render',
@@ -9643,6 +9626,11 @@ var App = function (_Component) {
           _reactRouterDom.Link,
           { to: '/pokemon' },
           'Your Pokes'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/shop' },
+          'Buy some Equipment'
         )
       ); //end of return
     } //end of render
@@ -26691,6 +26679,10 @@ var _Pokemon = __webpack_require__(258);
 
 var _Pokemon2 = _interopRequireDefault(_Pokemon);
 
+var _Shop = __webpack_require__(265);
+
+var _Shop2 = _interopRequireDefault(_Shop);
+
 var _reactRouterDom = __webpack_require__(242);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -26704,7 +26696,7 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LoginForm2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _SignupForm2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _App2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/test', component: _Test2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/shop', component: _Shop2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/pokemon', component: _Pokemon2.default })
   )
 );
@@ -29748,6 +29740,8 @@ var _axios = __webpack_require__(190);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+var _reactRouterDom = __webpack_require__(242);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -29777,7 +29771,7 @@ var Pokemon = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('/pokemon').then(function (response) {
+      _axios2.default.get('/api').then(function (response) {
         _this2.setState({
           pokemon: response.data
         });
@@ -29786,37 +29780,34 @@ var Pokemon = function (_Component) {
       });
     }
   }, {
-    key: 'signOut',
-    value: function signOut() {
-      var _this3 = this;
-
-      _axios2.default.get('http://localhost:8080/users/logout').then(function (data) {
-        _this3.props.history.push('/');
-      }).catch(function (error) {
-        console.log('Logout error', error);
-      });
-    }
-  }, {
     key: 'renderPoke',
     value: function renderPoke() {
       if (this.state.pokemon) {
-        return this.state.pokemon.map(function (poke, index) {
+        if (this.state.pokemon.length >= 1) {
+          return this.state.pokemon.map(function (poke, index) {
+            return _react2.default.createElement(
+              'div',
+              { key: index, className: 'pokemon' },
+              _react2.default.createElement(
+                'h1',
+                null,
+                'Pokemon here'
+              ),
+              _react2.default.createElement(
+                'h2',
+                null,
+                poke.name
+              ),
+              _react2.default.createElement('img', { src: poke.sprite })
+            );
+          });
+        } else {
           return _react2.default.createElement(
-            'div',
-            { key: index, className: 'pokemon' },
-            _react2.default.createElement(
-              'h1',
-              null,
-              'Pokemon here'
-            ),
-            _react2.default.createElement(
-              'h2',
-              null,
-              poke.name
-            ),
-            _react2.default.createElement('img', { src: poke.sprite })
+            'h1',
+            null,
+            'You have no pokemon! Go out and catch some!'
           );
-        });
+        }
       } else {
         return _react2.default.createElement(
           'h1',
@@ -29828,18 +29819,14 @@ var Pokemon = function (_Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
-
       console.log(this.state);
       return _react2.default.createElement(
         'div',
         { className: 'pokemon-container' },
         this.renderPoke(),
         _react2.default.createElement(
-          'button',
-          { onClick: function onClick() {
-              return _this4.signOut();
-            } },
+          _reactRouterDom.Link,
+          { to: '/' },
           'Log Out'
         )
       );
@@ -29850,6 +29837,98 @@ var Pokemon = function (_Component) {
 }(_react.Component);
 
 exports.default = Pokemon;
+
+/***/ }),
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(50);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _axios = __webpack_require__(190);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Shop = function (_Component) {
+  _inherits(Shop, _Component);
+
+  function Shop() {
+    _classCallCheck(this, Shop);
+
+    var _this = _possibleConstructorReturn(this, (Shop.__proto__ || Object.getPrototypeOf(Shop)).call(this));
+
+    _this.state = {
+      pokeballs: 0,
+      greatballs: 0,
+      ultraballs: 0,
+      cash: 0,
+      id: ''
+    }; //end of state
+    return _this;
+  } //end of constructor
+
+  _createClass(Shop, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      _axios2.default.get('/users').then(function (response) {
+        var res = response.data;
+        _this2.setState({
+          pokeballs: res.pokeballs,
+          greatballs: res.greatballs,
+          ultraballs: res.ultraballs,
+          cash: res.cash,
+          id: res.id
+        });
+      }).catch(function (error) {
+        console.log('Set User Error: ', error);
+      });
+    } //end of componentDidMount
+
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'shop' },
+        _react2.default.createElement(
+          'p',
+          null,
+          this.state.pokeballs
+        )
+      );
+    }
+  }]);
+
+  return Shop;
+}(_react.Component);
+
+exports.default = Shop;
 
 /***/ })
 /******/ ]);

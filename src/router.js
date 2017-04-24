@@ -4,6 +4,7 @@ import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import Test from './components/Test';
 import Pokemon from './components/Pokemon';
+import Shop from './components/Shop'
 import { BrowserRouter, Route } from 'react-router-dom';
 
 export default (
@@ -12,7 +13,7 @@ export default (
       <Route exact path='/' component={LoginForm} />
       <Route path='/signup' component={SignupForm} />
       <Route path='/home' component={App} />
-      <Route path='/test' component={Test} />
+      <Route path='/shop' component={Shop} />
       <Route path='/pokemon' component={Pokemon} />
     </div>
   </BrowserRouter>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom'
 //this shit works. Database is live, and rendering data. yay.
 
 class Pokemon extends Component {
@@ -13,7 +13,7 @@ class Pokemon extends Component {
   }
 
   componentDidMount(){
-    axios.get('/pokemon').then((response) =>{
+    axios.get('/api').then((response) =>{
       this.setState({
         pokemon: response.data
       });
@@ -22,25 +22,21 @@ class Pokemon extends Component {
     })
   }
 
-  signOut(){
-    axios.get('http://localhost:8080/users/logout').then((data) =>{
-      this.props.history.push('/')
-    }).catch((error) =>{
-      console.log('Logout error', error)
-    })
-  }
-
   renderPoke(){
     if (this.state.pokemon){
+      if (this.state.pokemon.length >= 1){
       return this.state.pokemon.map((poke, index) =>{
-    return (
+        return (
             <div key={index} className='pokemon'>
               <h1>Pokemon here</h1>
               <h2>{poke.name}</h2>
               <img src={poke.sprite} />
             </div>
-            )
-            })
+          )
+        })
+      } else {
+        return <h1>You have no pokemon! Go out and catch some!</h1>
+      }
     } else {
       return <h1>Nothing here</h1>
     }
@@ -51,7 +47,7 @@ class Pokemon extends Component {
     return(
       <div className='pokemon-container'>
       {this.renderPoke()}
-      <button onClick={() => this.signOut()}>Log Out</button>
+      <Link to='/'>Log Out</Link>
     </div>
     )
   }

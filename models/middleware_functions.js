@@ -1,3 +1,5 @@
+//sabrina is a life saver for sharing this with me!!
+
 const cookieParse = (req, res, next) => {
   // Only gets cookies if there are cookies
   if(req.headers.cookie){

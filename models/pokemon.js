@@ -2,7 +2,7 @@ const db = require('../db');
 const pokemon = {};
 
 pokemon.findAll = (user_id) =>{
-  return db.any('SELECT *, pokemon.id AS pokemonid FROM pokemon JOIN users ON users.id = pokemon.trainer_id WHERE user_id=$1', [user_id]);
+  return db.any('SELECT * FROM pokemon JOIN users ON users.id = pokemon.trainer_id WHERE users.id=$1', [user_id]);
 }
 
 pokemon.findOne = (id) =>{

@@ -6,15 +6,6 @@ import Test from './Test';
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      currentUser: null,
-      loggedIn: false,
-      currentUserId: ''
-    }//end of state
-  }//end of constructor
-
   //this is gonna die soon.
   //shift this functionality to a button to generate a pokemon.
   componentDidMount(){
@@ -26,14 +17,6 @@ class App extends Component {
     })//end of axios
   }//end of componentDidMount
 
-  setCurrentUser(user, id){
-    this.setState({
-      currentUser: user,
-      loggedIn: true,
-      currentUserId: id
-    })//end of setState
-  }//end of setCurrentUser
-
   render() {
     console.log(this.state)
     return (
@@ -42,6 +25,7 @@ class App extends Component {
         <p>To be a master, you have to think like a master</p>
         <Link to='/test'>Test Link</Link>
         <Link to='/pokemon'>Your Pokes</Link>
+        <Link to='/shop'>Buy some Equipment</Link>
       </div>
     )//end of return
   }//end of render
