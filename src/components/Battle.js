@@ -2,6 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
 
+//for anyone reading this monstrosity, i'm so sorry for this
+//desperation and coffee fueled this mass of code vomit
+//i know it's awful and inefficient and gross to look at,
+//and i know how much i can refactor it.
+//that being said, this abomination works.
+//i'll be back to fix it later.
+
 class Battle extends Component {
 
   constructor(){
@@ -45,7 +52,6 @@ class Battle extends Component {
     this.setState({
       randomPoke: poke
     });
-
   };
 
   caught(){
@@ -77,6 +83,9 @@ class Battle extends Component {
       console.log('catch error: ', error)
     })
   }
+
+  //the next three functions are all the same logic applied to three different percentages.
+  //i'll refactor this into a switch statement when i'm not racing against the clock.
 
   pokeCatch(){
     console.log('poke ball thrown')
@@ -218,7 +227,7 @@ class Battle extends Component {
 
   renderWild(){
     if(this.state.randomPoke){
-    return (
+      return (
         <div className='wild-pokemon'>
           <p>{this.state.pokeballsThrown} Pokeballs Thrown</p>
           <p>{this.state.greatballsThrown} Great Balls Thrown</p>
@@ -227,18 +236,18 @@ class Battle extends Component {
           <img src={this.state.randomPoke.sprites.front_default} />
           <div className='battle-hud'>
             <button onClick={()=>this.pokeCatch()}>Throw a Pokeball?({this.state.pokeballsInHand} left)</button>
-            <button onClick={()=>this.greatCatch()}>Throw a Great Ball? ({this.state.greatballsInHand} left)</button>
-            <button onClick={()=>this.ultraCatch()}>Throw an Ultra Ball? ({this.state.ultraballsInHand} left)</button>
-          <Link to='/home'>Run!</Link>
+            <button onClick={()=>this.greatCatch()}>Throw a Great   Ball? ({this.state.greatballsInHand} left)</button>
+            <button onClick={()=>this.ultraCatch()}>Throw an  Ultra Ball? ({this.state.ultraballsInHand} left)</button>
+            <Link to='/home'>Run!</Link>
+          </div>
         </div>
-        </div>
-      )
+      ) //end of battle HUD
     } else {
       return (
         <h2>Shhh... There may be one approaching</h2>
-      )
-    }
-  }
+      ) //end of return
+    } //end of if statement that checks for state
+  }// end of render wild
 
   render(){
     return(
@@ -246,9 +255,9 @@ class Battle extends Component {
         <h1>BITCHES</h1>
         <button onClick={() => this.getRandomPoke()}>Find!</button>
         {this.renderWild()}
-    </div>
-    )
-  }
+      </div>
+    ) //end of return
+  } //end of render
 
 }//end of class
 

@@ -3,7 +3,6 @@ import axios from 'axios';
 
 class SignupForm extends Component {
 
-
   constructor(){
     super();
     this.state = {
@@ -30,8 +29,6 @@ class SignupForm extends Component {
       passwordConfirmation: e.target.value
     })//end of setState
   }//end of handleConfirmationInput
-
-  
 
   render(){
     return(

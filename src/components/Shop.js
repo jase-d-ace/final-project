@@ -71,8 +71,8 @@ class Shop extends Component{
       })
     } else {
       alert('You don\'t have enough money for this purchase.')
-    }
-  }
+    } //end of check for funds
+  } //end of buy
 
   render(){
     return(
@@ -93,8 +93,8 @@ class Shop extends Component{
           <input type='submit' value="Buy" />
         </form>
       </div>
-    )
-  }
-}
+    ) //end of return
+  } //end of render
+} //end of class
 
 export default Shop;

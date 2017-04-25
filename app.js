@@ -11,12 +11,16 @@ const express = require('express'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
       PORT = process.env.PORT || 8080;
+
 //hook up express
 app.use(express.static('build'));
+
 //hook up cors
 app.use(cors());
+
 //hook up morgan
 app.use(morgan('dev'));
+
 //hook up passport
 app.use(session({
   secret: 'keyboard cat',
@@ -25,13 +29,16 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
 //hook up bodyParser
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(bodyParser.json());
+
 //hook up cookieParser
 app.use(cookieParser());
+
 //(de)serialize users
 const person = require('./models/user');
 const localStrat = require('passport-local').Strategy;
@@ -46,6 +53,7 @@ passport.serializeUser((userObj, done) =>{
 passport.deserializeUser((user, done)=>{
   done(null, user)
 })
+
 //Passport Strats
 //signup strat
 passport.use('local-signup', new localStrat({
@@ -60,6 +68,7 @@ passport.use('local-signup', new localStrat({
         return done(null, false);
     });
 }));
+
 //login strat
 passport.use('local-login', new localStrat({
     usernameField: 'user[username]'
@@ -83,18 +92,36 @@ passport.use('local-login', new localStrat({
         console.log('User Login Error: ', error);
     });
 }));
+
 //hook up router
 app.use(require('./router'));
+
 //hook up socket server
 io.on('connection', (socket)=>{
   console.log('a user has connected');
+
   socket.on('chat message', (msg) =>{
     console.log('message: ', msg)
   })
+
   socket.on('disconnect', ()=>{
     console.log('a user has disconnected');
   });
-});
+
+  socket.on('room', (data)=>{
+    socket.join(data.room)
+  })
+
+  socket.on('leave room', (data) =>{
+    socket.leave(data.room)
+  })
+
+  socket.on('speaking event', (data)=>{
+    socket.broadcast.to(data.room).emit('receive message', data)
+  })
+
+}); //end of socket generate
+
 //check for life
 http.listen(PORT, ()=>{
   console.log(`ALIVE ON PORT ${PORT}`)

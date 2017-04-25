@@ -9564,10 +9564,6 @@ var _Pokemon = __webpack_require__(258);
 
 var _Pokemon2 = _interopRequireDefault(_Pokemon);
 
-var _Test = __webpack_require__(257);
-
-var _Test2 = _interopRequireDefault(_Test);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9622,11 +9618,6 @@ var App = function (_Component) {
           'p',
           null,
           'To be a master, you have to think like a master'
-        ),
-        _react2.default.createElement(
-          _reactRouterDom.Link,
-          { to: '/test' },
-          'Test Link'
         ),
         _react2.default.createElement(
           _reactRouterDom.Link,
@@ -26709,7 +26700,7 @@ exports.default = _react2.default.createElement(
     _react2.default.createElement(_reactRouterDom.Route, { path: '/home', component: _App2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/shop', component: _Shop2.default }),
     _react2.default.createElement(_reactRouterDom.Route, { path: '/battle', component: _Battle2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { path: '/pokemon', component: _Pokemon2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/pokemon', component: _Pokemon2.default })
   )
 );
 
@@ -29547,7 +29538,6 @@ var SignupForm = function (_Component) {
       }); //end of setState
     } //end of handleConfirmationInput
 
-
   }, {
     key: 'render',
     value: function render() {
@@ -29687,56 +29677,7 @@ exports.default = LoginForm;
 
 /***/ }),
 /* 256 */,
-/* 257 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = __webpack_require__(50);
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var Test = function (_Component) {
-  _inherits(Test, _Component);
-
-  function Test() {
-    _classCallCheck(this, Test);
-
-    return _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).apply(this, arguments));
-  }
-
-  _createClass(Test, [{
-    key: 'render',
-    value: function render() {
-      return _react2.default.createElement(
-        'p',
-        null,
-        'You\'ve found the test'
-      );
-    }
-  }]);
-
-  return Test;
-}(_react.Component);
-
-exports.default = Test;
-
-/***/ }),
+/* 257 */,
 /* 258 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -29767,8 +29708,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-//this shit works. Database is live, and rendering data. yay.
-
 var Pokemon = function (_Component) {
   _inherits(Pokemon, _Component);
 
@@ -29779,9 +29718,9 @@ var Pokemon = function (_Component) {
 
     _this.state = {
       pokemon: null
-    };
+    }; //end of state
     return _this;
-  }
+  } //end of constructor
 
   _createClass(Pokemon, [{
     key: 'componentDidMount',
@@ -29794,8 +29733,9 @@ var Pokemon = function (_Component) {
         });
       }).catch(function (error) {
         console.log('axios error:', error);
-      });
-    }
+      }); //end of API ping
+    } //end of componentDidMount
+
   }, {
     key: 'renderPoke',
     value: function renderPoke() {
@@ -29813,22 +29753,23 @@ var Pokemon = function (_Component) {
               ),
               _react2.default.createElement('img', { src: poke.sprite })
             );
-          });
+          }); //end of map given you're a user that has some pokes
         } else {
           return _react2.default.createElement(
             'h1',
             null,
             'You have no pokemon! Go out and catch some!'
           );
-        }
+        } //end of if statement that checks if a user has pokes
       } else {
         return _react2.default.createElement(
           'h1',
           null,
           'How did you get here without logging in?!'
         );
-      }
-    }
+      } //end of if statement that looks for a user
+    } //end of render poke
+
   }, {
     key: 'render',
     value: function render() {
@@ -29836,12 +29777,13 @@ var Pokemon = function (_Component) {
         'div',
         { className: 'pokemon-container' },
         this.renderPoke()
-      );
-    }
+      ); //end of return
+    } //end of render
+
   }]);
 
   return Pokemon;
-}(_react.Component);
+}(_react.Component); //end of class
 
 exports.default = Pokemon;
 
@@ -29966,8 +29908,9 @@ var Shop = function (_Component) {
         });
       } else {
         alert('You don\'t have enough money for this purchase.');
-      }
-    }
+      } //end of check for funds
+    } //end of buy
+
   }, {
     key: 'render',
     value: function render() {
@@ -30040,12 +29983,13 @@ var Shop = function (_Component) {
             } }),
           _react2.default.createElement('input', { type: 'submit', value: 'Buy' })
         )
-      );
-    }
+      ); //end of return
+    } //end of render
+
   }]);
 
   return Shop;
-}(_react.Component);
+}(_react.Component); //end of class
 
 exports.default = Shop;
 
@@ -30109,9 +30053,9 @@ var UI = function (_Component) {
       greatballs: 0,
       ultraballs: 0,
       masterballs: 0
-    };
+    }; //end of state
     return _this;
-  }
+  } //end of constructor
 
   _createClass(UI, [{
     key: 'componentDidMount',
@@ -30131,23 +30075,24 @@ var UI = function (_Component) {
         });
       }).catch(function (error) {
         console.log('set User error: ', error);
-      });
-      setInterval(function () {
-        _axios2.default.put('/users/' + _this2.state.id, {
-          pokeballs: 0,
-          greatballs: 0,
-          ultraballs: 0,
-          cash: -200,
-          masterballs: 0
-        }).then(function (response) {
-          _this2.setState({
-            cash: response.data.cash
-          });
-        }).catch(function (error) {
-          console.log('interval error:', error);
-        });
-      }, 300000);
-    }
+      }); //end of set User
+      // setInterval(()=>{
+      //   axios.put('/users/'+this.state.id,{
+      //     pokeballs: 0,
+      //     greatballs: 0,
+      //     ultraballs: 0,
+      //     cash: (-200),
+      //     masterballs: 0
+      //   }).then((response) =>{
+      //     this.setState({
+      //       cash: response.data.cash
+      //     })
+      //   }).catch((error) =>{
+      //     console.log('interval error:', error)
+      //   })//end of axios promise
+      // }, 300000) //end of passive income generation
+    } //end of componentDidMount
+
   }, {
     key: 'renderUserInfo',
     value: function renderUserInfo() {
@@ -30207,15 +30152,16 @@ var UI = function (_Component) {
               )
             )
           )
-        );
+        ); //end of return
       } else {
         return _react2.default.createElement(
           'p',
           null,
           'Please Log In'
-        );
-      }
-    }
+        ); //end of return
+      } //end of else
+    } //end of render user info
+
   }, {
     key: 'render',
     value: function render() {
@@ -30223,12 +30169,14 @@ var UI = function (_Component) {
         'div',
         { className: 'hud' },
         this.renderUserInfo()
-      );
-    }
+      ); // end of return statement
+    } //end of render
+
   }]);
 
   return UI;
-}(_react.Component);
+}(_react.Component); //end of UI class
+
 
 exports.default = UI;
 
@@ -30262,6 +30210,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//for anyone reading this monstrosity, i'm so sorry for this
+//desperation and coffee fueled this mass of code vomit
+//i know it's awful and inefficient and gross to look at,
+//and i know how much i can refactor it.
+//that being said, this abomination works.
+//i'll be back to fix it later.
 
 var Battle = function (_Component) {
   _inherits(Battle, _Component);
@@ -30353,6 +30308,10 @@ var Battle = function (_Component) {
         console.log('catch error: ', error);
       });
     }
+
+    //the next three functions are all the same logic applied to three different percentages.
+    //i'll refactor this into a switch statement when i'm not racing against the clock.
+
   }, {
     key: 'pokeCatch',
     value: function pokeCatch() {
@@ -30552,7 +30511,7 @@ var Battle = function (_Component) {
               { onClick: function onClick() {
                   return _this5.greatCatch();
                 } },
-              'Throw a Great Ball? (',
+              'Throw a Great   Ball? (',
               this.state.greatballsInHand,
               ' left)'
             ),
@@ -30561,7 +30520,7 @@ var Battle = function (_Component) {
               { onClick: function onClick() {
                   return _this5.ultraCatch();
                 } },
-              'Throw an Ultra Ball? (',
+              'Throw an  Ultra Ball? (',
               this.state.ultraballsInHand,
               ' left)'
             ),
@@ -30571,15 +30530,16 @@ var Battle = function (_Component) {
               'Run!'
             )
           )
-        );
+        ); //end of battle HUD
       } else {
         return _react2.default.createElement(
           'h2',
           null,
           'Shhh... There may be one approaching'
-        );
-      }
-    }
+        ); //end of return
+      } //end of if statement that checks for state
+    } // end of render wild
+
   }, {
     key: 'render',
     value: function render() {
@@ -30601,8 +30561,9 @@ var Battle = function (_Component) {
           'Find!'
         ),
         this.renderWild()
-      );
-    }
+      ); //end of return
+    } //end of render
+
   }]);
 
   return Battle;

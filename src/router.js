@@ -17,7 +17,7 @@ export default (
       <Route path='/home' component={App} />
       <Route path='/shop' component={Shop} />
       <Route path='/battle' component={Battle} />
-      <Route path='/pokemon' component={Pokemon} />
+      <Route exact path='/pokemon' component={Pokemon} />
     </div>
   </BrowserRouter>
 )
