@@ -2,6 +2,8 @@
 const express = require('express'),
       cors = require('cors'),
       app = express(),
+      http = require('http').Server(app),
+      io = require('socket.io')(http),
       morgan = require('morgan'),
       bcrypt = require('bcrypt'),
       session = require('express-session'),
@@ -83,7 +85,17 @@ passport.use('local-login', new localStrat({
 }));
 //hook up router
 app.use(require('./router'));
+//hook up socket server
+io.on('connection', (socket)=>{
+  console.log('a user has connected');
+  socket.on('chat message', (msg) =>{
+    console.log('message: ', msg)
+  })
+  socket.on('disconnect', ()=>{
+    console.log('a user has disconnected');
+  });
+});
 //check for life
-app.listen(PORT, ()=>{
+http.listen(PORT, ()=>{
   console.log(`ALIVE ON PORT ${PORT}`)
 })

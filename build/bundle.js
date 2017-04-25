@@ -29802,18 +29802,14 @@ var Pokemon = function (_Component) {
       if (this.state.pokemon) {
         if (this.state.pokemon.length >= 1) {
           return this.state.pokemon.map(function (poke, index) {
+
             return _react2.default.createElement(
               'div',
               { key: index, className: 'pokemon' },
               _react2.default.createElement(
                 'h1',
                 null,
-                'Pokemon here'
-              ),
-              _react2.default.createElement(
-                'h2',
-                null,
-                poke.name
+                poke.name.charAt(0).toUpperCase() + poke.name.slice(1)
               ),
               _react2.default.createElement('img', { src: poke.sprite })
             );
@@ -30106,6 +30102,7 @@ var UI = function (_Component) {
     var _this = _possibleConstructorReturn(this, (UI.__proto__ || Object.getPrototypeOf(UI)).call(this));
 
     _this.state = {
+      id: null,
       username: null,
       cash: 0,
       pokeballs: 0,
@@ -30124,6 +30121,7 @@ var UI = function (_Component) {
       _axios2.default.get('/users').then(function (response) {
         var res = response.data;
         _this2.setState({
+          id: res.id,
           username: res.username,
           cash: res.cash,
           pokeballs: res.pokeballs,
@@ -30134,6 +30132,21 @@ var UI = function (_Component) {
       }).catch(function (error) {
         console.log('set User error: ', error);
       });
+      setInterval(function () {
+        _axios2.default.put('/users/' + _this2.state.id, {
+          pokeballs: 0,
+          greatballs: 0,
+          ultraballs: 0,
+          cash: -200,
+          masterballs: 0
+        }).then(function (response) {
+          _this2.setState({
+            cash: response.data.cash
+          });
+        }).catch(function (error) {
+          console.log('interval error:', error);
+        });
+      }, 300000);
     }
   }, {
     key: 'renderUserInfo',
@@ -30147,6 +30160,12 @@ var UI = function (_Component) {
             null,
             'Welcome, ',
             this.state.username
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Your Cash: \u20BD',
+            this.state.cash
           ),
           _react2.default.createElement(
             'nav',
