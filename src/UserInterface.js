@@ -59,13 +59,13 @@ renderUserInfo(){
       <div className='hud-details'>
       <span>Welcome, {this.state.username}</span>
       <p>Your Cash: &#8381;{this.state.cash}</p>
-      <ChatList />
       <nav className='nav-bar'>
         <li><Link to='/home'>Home</Link></li>
-        <li><Link to='/battle' >Find Pokes</Link></li>
+        <li><Link to='/battle'>Find Pokes</Link></li>
         <li><Link to='/pokemon'>Your Pokes</Link></li>
         <li><Link to='/shop'>Shop</Link></li>
       </nav>
+      <ChatList />
     </div>
   ) //end of return
   } else {

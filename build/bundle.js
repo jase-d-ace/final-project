@@ -15720,10 +15720,6 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRouterDom = __webpack_require__(27);
 
-var _Pokemon = __webpack_require__(75);
-
-var _Pokemon2 = _interopRequireDefault(_Pokemon);
-
 __webpack_require__(313);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -15780,6 +15776,11 @@ var App = function (_Component) {
           'p',
           null,
           'To be a master, you have to think like a master'
+        ),
+        _react2.default.createElement(
+          _reactRouterDom.Link,
+          { to: '/battle' },
+          'Go Scouting'
         ),
         _react2.default.createElement(
           _reactRouterDom.Link,
@@ -15869,8 +15870,6 @@ var Battle = function (_Component) {
 
       _axios2.default.get('/users').then(function (response) {
         var res = response.data;
-        console.log('got a user');
-        console.log(response.data);
         _this2.setState({
           trainer_id: res.id,
           pokeballsInHand: res.pokeballs,
@@ -16092,31 +16091,35 @@ var Battle = function (_Component) {
       if (this.state.randomPoke) {
         return _react2.default.createElement(
           'div',
-          { className: 'wild-pokemon' },
+          { className: 'wild-state' },
           _react2.default.createElement(
-            'p',
-            null,
-            this.state.pokeballsThrown,
-            ' Pokeballs Thrown'
+            'div',
+            { className: 'wild-pokemon' },
+            _react2.default.createElement(
+              'p',
+              null,
+              this.state.pokeballsThrown,
+              ' Pokeballs Thrown'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              this.state.greatballsThrown,
+              ' Great Balls Thrown'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              this.state.ultraballsThrown,
+              ' Ultra Balls Thrown'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              this.state.randomPoke.name
+            ),
+            _react2.default.createElement('img', { src: this.state.randomPoke.sprites.front_default })
           ),
-          _react2.default.createElement(
-            'p',
-            null,
-            this.state.greatballsThrown,
-            ' Great Balls Thrown'
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            this.state.ultraballsThrown,
-            ' Ultra Balls Thrown'
-          ),
-          _react2.default.createElement(
-            'p',
-            null,
-            this.state.randomPoke.name
-          ),
-          _react2.default.createElement('img', { src: this.state.randomPoke.sprites.front_default }),
           _react2.default.createElement(
             'div',
             { className: 'battle-hud' },
@@ -16125,7 +16128,8 @@ var Battle = function (_Component) {
               { onClick: function onClick() {
                   return _this5.pokeCatch();
                 } },
-              'Throw a Pokeball?(',
+              _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png' }),
+              '(',
               this.state.pokeballsInHand,
               ' left)'
             ),
@@ -16134,7 +16138,8 @@ var Battle = function (_Component) {
               { onClick: function onClick() {
                   return _this5.greatCatch();
                 } },
-              'Throw a Great   Ball? (',
+              _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png' }),
+              ' (',
               this.state.greatballsInHand,
               ' left)'
             ),
@@ -16143,7 +16148,8 @@ var Battle = function (_Component) {
               { onClick: function onClick() {
                   return _this5.ultraCatch();
                 } },
-              'Throw an  Ultra Ball? (',
+              _react2.default.createElement('img', { src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png' }),
+              ' (',
               this.state.ultraballsInHand,
               ' left)'
             ),
@@ -38608,7 +38614,6 @@ var UI = function (_Component) {
             'Your Cash: \u20BD',
             this.state.cash
           ),
-          _react2.default.createElement(_ChatList2.default, null),
           _react2.default.createElement(
             'nav',
             { className: 'nav-bar' },
@@ -38648,7 +38653,8 @@ var UI = function (_Component) {
                 'Shop'
               )
             )
-          )
+          ),
+          _react2.default.createElement(_ChatList2.default, null)
         ); //end of return
       } else {
         return _react2.default.createElement(
@@ -38977,12 +38983,14 @@ var _react = __webpack_require__(4);
 
 var _react2 = _interopRequireDefault(_react);
 
+__webpack_require__(320);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var Message = function Message(props) {
   return _react2.default.createElement(
     'li',
-    { key: props.index },
+    null,
     _react2.default.createElement(
       'span',
       null,
@@ -39019,6 +39027,8 @@ var _Message = __webpack_require__(309);
 
 var _Message2 = _interopRequireDefault(_Message);
 
+__webpack_require__(320);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39041,17 +39051,29 @@ var MessageWindow = function (_Component) {
     value: function renderMessages() {
       var _this2 = this;
 
-      return this.props.messages.map(function (message, index) {
-        return _react2.default.createElement(_Message2.default, { username: _this2.props.username, index: index, message: message });
-      });
+      if (this.props.messages.length >= 1) {
+        return this.props.messages.map(function (message, index) {
+          return _react2.default.createElement(_Message2.default, { key: index, username: _this2.props.username, index: index, message: message });
+        });
+      } else {
+        return _react2.default.createElement(
+          'p',
+          null,
+          'Be the first to write something!'
+        );
+      }
     }
   }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        'ul',
-        null,
-        this.renderMessages()
+        'div',
+        { className: 'message-window' },
+        _react2.default.createElement(
+          'ul',
+          null,
+          this.renderMessages()
+        )
       );
     }
   }]);
@@ -39082,6 +39104,8 @@ var _axios = __webpack_require__(18);
 
 var _axios2 = _interopRequireDefault(_axios);
 
+__webpack_require__(319);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -39089,6 +39113,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+//yes, i know this looks like shit
+//yes, i'm gonna get around to changing it around
 
 var Shop = function (_Component) {
   _inherits(Shop, _Component);
@@ -39188,68 +39215,78 @@ var Shop = function (_Component) {
         'div',
         { className: 'shop-container' },
         _react2.default.createElement(
-          'p',
-          null,
-          'Your Cash: \u20BD',
-          this.state.cash,
-          ' '
-        ),
-        _react2.default.createElement(
-          'ul',
-          null,
-          'Your Stock:',
+          'div',
+          { className: 'shop-holder' },
           _react2.default.createElement(
-            'li',
+            'p',
             null,
-            'Poke Balls: ',
-            this.state.pokeballsInHand
+            'Your Cash: \u20BD',
+            this.state.cash,
+            ' '
           ),
           _react2.default.createElement(
-            'li',
+            'ul',
             null,
-            'Great Balls: ',
-            this.state.greatballsInHand
+            'Your Stock:',
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png' }),
+              ' ',
+              this.state.pokeballsInHand
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png' }),
+              ' ',
+              this.state.greatballsInHand
+            ),
+            _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png' }),
+              ' ',
+              this.state.ultraballsInHand
+            )
           ),
           _react2.default.createElement(
-            'li',
-            null,
-            'Ultra Balls: ',
-            this.state.ultraballsInHand
+            'form',
+            { className: 'shop', onSubmit: function onSubmit(e) {
+                return _this4.buy(e);
+              } },
+            _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png' }),
+            _react2.default.createElement(
+              'p',
+              null,
+              ' \u20BD200 In Cart: ',
+              this.state.pokeballsInCart
+            ),
+            _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                return _this4.addPokeballsToCart(e);
+              } }),
+            _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png' }),
+            _react2.default.createElement(
+              'p',
+              null,
+              '\u20BD600 In Cart: ',
+              this.state.greatballsInCart
+            ),
+            _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                return _this4.addGreatballsToCart(e);
+              } }),
+            _react2.default.createElement('img', { className: 'ball', src: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png' }),
+            _react2.default.createElement(
+              'p',
+              null,
+              '\u20BD1200 In Cart: ',
+              this.state.ultraballsInCart
+            ),
+            _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
+                return _this4.addUltraballsToCart(e);
+              } }),
+            _react2.default.createElement('input', { className: 'button', type: 'submit', value: 'Buy' })
           )
-        ),
-        _react2.default.createElement(
-          'form',
-          { className: 'shop', onSubmit: function onSubmit(e) {
-              return _this4.buy(e);
-            } },
-          _react2.default.createElement(
-            'p',
-            null,
-            'Poke Ball: \u20BD200 In Cart: ',
-            this.state.pokeballsInCart
-          ),
-          _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-              return _this4.addPokeballsToCart(e);
-            } }),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Great Ball: \u20BD600 In Cart: ',
-            this.state.greatballsInCart
-          ),
-          _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-              return _this4.addGreatballsToCart(e);
-            } }),
-          _react2.default.createElement(
-            'p',
-            null,
-            'Ultra Ball: \u20BD1200 In Cart: ',
-            this.state.ultraballsInCart
-          ),
-          _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
-              return _this4.addUltraballsToCart(e);
-            } }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Buy' })
         )
       ); //end of return
     } //end of render
@@ -39423,6 +39460,18 @@ _reactDom2.default.render(_router2.default, document.getElementById('root'));
 
 /***/ }),
 /* 318 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 319 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 320 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

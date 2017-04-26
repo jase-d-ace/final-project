@@ -29,8 +29,6 @@ class Battle extends Component {
   componentDidMount(){
     axios.get('/users').then((response) =>{
       const res = response.data
-      console.log('got a user')
-      console.log(response.data)
       this.setState({
         trainer_id: res.id,
         pokeballsInHand: res.pokeballs,
@@ -229,16 +227,18 @@ class Battle extends Component {
   renderWild(){
     if(this.state.randomPoke){
       return (
+        <div className='wild-state'>
         <div className='wild-pokemon'>
           <p>{this.state.pokeballsThrown} Pokeballs Thrown</p>
           <p>{this.state.greatballsThrown} Great Balls Thrown</p>
           <p>{this.state.ultraballsThrown} Ultra Balls Thrown</p>
           <p>{this.state.randomPoke.name}</p>
           <img src={this.state.randomPoke.sprites.front_default} />
+        </div>
           <div className='battle-hud'>
-            <button onClick={()=>this.pokeCatch()}>Throw a Pokeball?({this.state.pokeballsInHand} left)</button>
-            <button onClick={()=>this.greatCatch()}>Throw a Great   Ball? ({this.state.greatballsInHand} left)</button>
-            <button onClick={()=>this.ultraCatch()}>Throw an  Ultra Ball? ({this.state.ultraballsInHand} left)</button>
+            <button onClick={()=>this.pokeCatch()}><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" />({this.state.pokeballsInHand} left)</button>
+            <button onClick={()=>this.greatCatch()}><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png" /> ({this.state.greatballsInHand} left)</button>
+            <button onClick={()=>this.ultraCatch()}><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" /> ({this.state.ultraballsInHand} left)</button>
             <Link to='/home'>Run!</Link>
           </div>
         </div>

@@ -17,6 +17,8 @@
 a {
   color: aliceblue;
   text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
 }
 
 a:visited {
@@ -24,11 +26,16 @@ a:visited {
 }
 
 button {
-  background-color: rgb(70, 70, 70)
+  background-color: rgb(70, 70, 70);
+  width: 90px;
+}
+
+.button {
+  width: 90px;
 }
 
 input {
-  background-color: rgb(70, 70, 70)
+  background-color: rgb(70, 70, 70);
 }
 
 
@@ -101,9 +108,104 @@ input {
 /*Battle Stuff*/
 
 .battle-screen {
-  background-image: url('http://orig07.deviantart.net/dd1d/f/2013/340/d/1/desert_2_xy_battle_background_by_worldslayer608-d6x05bc.png');
+  -ms-align-items: center;
+  align-items: center;
+  background-image: url('http://img11.deviantart.net/56f7/i/2014/173/7/9/kanto_safari_zone___dusk_by_falke2009-d5f8xsc.png');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 100vh;
   width: 100vw;
+}
+
+.wild-pokemon img {
+  height: 200px;
+  width: 200px;
+}
+/*Shop Stuff*/
+
+.shop-container {
+  background-image: url('https://cdna.artstation.com/p/assets/images/images/003/701/294/large/jessika-salenson-pokemon-shop-ingameview.jpg?1476607218');
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.shop-holder {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 40%;
+}
+
+.shop-holder ul {
+  padding: 0;
+}
+
+.shop-holder ul li {
+  list-style: none;
+}
+
+.shop {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.shop p {
+  margin: 0;
+}
+
+.ball {
+  margin: 0;
+}
+/*Message Window Stuff*/
+
+.message-window {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+li {
+  list-style: none;
 }
 /*User Interface Stuff*/
 
@@ -117,6 +219,18 @@ input {
   width: 100vw;
 }
 
+.chat-window {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+}
+
 .hud-details {
   display: -webkit-flex;
   display: -ms-flex;
@@ -125,6 +239,8 @@ input {
   -ms-flex-direction: column;
   flex-direction: column;
   justify-content: flex-start;
+  height: 100%;
+  width: 50%;
 }
 
 .hud-details nav {

@@ -1,8 +1,9 @@
 import React from 'react';
+import '../../styles/Messages.css'
 
 const Message = (props) =>{
   return (
-    <li key={props.index}><span>{props.username}</span><p>{props.message}</p></li>
+    <li><span>{props.username}</span><p>{props.message}</p></li>
   )
 }
 

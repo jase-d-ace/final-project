@@ -10,6 +10,18 @@
   width: 100vw;
 }
 
+.chat-window {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+}
+
 .hud-details {
   display: -webkit-flex;
   display: -ms-flex;
@@ -18,6 +30,8 @@
   -ms-flex-direction: column;
   flex-direction: column;
   justify-content: flex-start;
+  height: 100%;
+  width: 50%;
 }
 
 .hud-details nav {

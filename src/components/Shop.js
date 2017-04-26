@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import '../../styles/Shop.css'
+
+//yes, i know this looks like shit
+//yes, i'm gonna get around to changing it around
 
 class Shop extends Component{
 
@@ -77,21 +81,23 @@ class Shop extends Component{
   render(){
     return(
       <div className='shop-container'>
-        <p>Your Cash: &#8381;{this.state.cash} </p>
-        <ul>Your Stock:
-          <li>Poke Balls: {this.state.pokeballsInHand}</li>
-          <li>Great Balls: {this.state.greatballsInHand}</li>
-          <li>Ultra Balls: {this.state.ultraballsInHand}</li>
-        </ul>
-        <form className='shop' onSubmit={(e)=>this.buy(e)}>
-        <p>Poke Ball: &#8381;200 In Cart: {this.state.pokeballsInCart}</p>
-        <input type='text' onChange={(e)=>this.addPokeballsToCart(e)} />
-        <p>Great Ball: &#8381;600 In Cart: {this.state.greatballsInCart}</p>
-          <input type='text' onChange={(e)=>this.addGreatballsToCart(e)} />
-        <p>Ultra Ball: &#8381;1200 In Cart: {this.state.ultraballsInCart}</p>
-          <input type='text' onChange={(e)=>this.addUltraballsToCart(e)} />
-          <input type='submit' value="Buy" />
-        </form>
+        <div className='shop-holder'>
+          <p>Your Cash: &#8381;{this.state.cash} </p>
+          <ul>Your Stock:
+            <li><img className='ball' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" /> {this.state.pokeballsInHand}</li>
+            <li><img className='ball' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png' /> {this.state.greatballsInHand}</li>
+            <li><img className='ball' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" /> {this.state.ultraballsInHand}</li>
+          </ul>
+          <form className='shop' onSubmit={(e)=>this.buy(e)}>
+            <img className='ball' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/poke-ball.png" /><p> &#8381;200 In Cart: {this.state.pokeballsInCart}</p>
+            <input type='text' onChange={(e)=>this.addPokeballsToCart(e)} />
+            <img className='ball' src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/great-ball.png' /><p>&#8381;600 In Cart: {this.state.greatballsInCart}</p>
+            <input type='text' onChange={(e)=>this.addGreatballsToCart(e)} />
+            <img className='ball' src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/items/ultra-ball.png" /><p>&#8381;1200 In Cart: {this.state.ultraballsInCart}</p>
+            <input type='text' onChange={(e)=>this.addUltraballsToCart(e)} />
+            <input className='button' type='submit' value="Buy" />
+          </form>
+        </div>
       </div>
     ) //end of return
   } //end of render

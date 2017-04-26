@@ -1,0 +1,62 @@
+/*Shop Stuff*/
+
+.shop-container {
+  background-image: url('https://cdna.artstation.com/p/assets/images/images/003/701/294/large/jessika-salenson-pokemon-shop-ingameview.jpg?1476607218');
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.shop-holder {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 40%;
+}
+
+.shop-holder ul {
+  padding: 0;
+}
+
+.shop-holder ul li {
+  list-style: none;
+}
+
+.shop {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.shop p {
+  margin: 0;
+}
+
+.ball {
+  margin: 0;
+}

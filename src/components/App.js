@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import Pokemon from './Pokemon';
 import '../../styles/App.css';
 
 class App extends Component {
@@ -22,6 +21,7 @@ class App extends Component {
         <button onClick={() => this.logOut()}>Log Out</button>
         <h1>Welcome to the Safari Zone!</h1>
         <p>To be a master, you have to think like a master</p>
+        <Link to='/battle'>Go Scouting</Link>
         <Link to='/pokemon'>Your Pokes</Link>
         <Link to='/shop'>Buy some Equipment</Link>
 

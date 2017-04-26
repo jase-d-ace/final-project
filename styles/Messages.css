@@ -1,0 +1,19 @@
+/*Message Window Stuff*/
+
+.message-window {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+li {
+  list-style: none;
+}
