@@ -12,6 +12,9 @@
     "type": "git",
     "url": "git+https://github.com/jase-d-ace/final-project.git"
   },
+  "engines":{
+    "node": "7.5.0"
+  },
   "author": "",
   "license": "ISC",
   "bugs": {

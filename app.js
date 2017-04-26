@@ -10,7 +10,7 @@ const express = require('express'),
       passport = require('passport'),
       cookieParser = require('cookie-parser'),
       bodyParser = require('body-parser'),
-      PORT = process.env.PORT || 8080;
+      PORT = process.env.PORT || 3000;
 
 //hook up express
 app.use(express.static('build'));
