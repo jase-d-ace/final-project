@@ -116,7 +116,7 @@ io.on('connection', (socket)=>{
   socket.on('speaking event', (data)=>{
     console.log('message:', data.message)
     console.log('speaking event data', data)
-    socket.emit('receive message', data)
+    io.emit('receive message', data)
   })
 
 }); //end of socket generate
