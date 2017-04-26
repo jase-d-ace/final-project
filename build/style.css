@@ -1,0 +1,151 @@
+/*Home Page Stuff*/
+
+.main {
+  background-image: url('http://orig08.deviantart.net/dfb5/f/2012/331/3/b/safari_zone_stampede__by_readreeds-d5meoku.jpg');
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+}
+/*Global Stuff*/
+
+* {
+  margin: 0 auto;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: aliceblue;
+}
+
+a {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+a:visited {
+  color: azure;
+}
+
+button {
+  background-color: rgb(70, 70, 70)
+}
+
+input {
+  background-color: rgb(70, 70, 70)
+}
+
+
+/*Form Stuff*/
+
+.landing-page {
+  -ms-align-items: center;
+  align-items: center;
+  background-image: url('http://pre10.deviantart.net/206a/th/pre/i/2016/035/f/5/pokemon__somewhere_in_safari_zone_by_mark331-d9qihst.jpg');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-form {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 30%;
+  width: 30%;
+}
+
+.form {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 80%;
+}
+
+.form-inputs {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 2%;
+}
+/*Battle Stuff*/
+
+.battle-screen {
+  background-image: url('http://orig07.deviantart.net/dd1d/f/2013/340/d/1/desert_2_xy_battle_background_by_worldslayer608-d6x05bc.png');
+  height: 100vh;
+  width: 100vw;
+}
+/*User Interface Stuff*/
+
+
+/*Ask Kaitlyn for help on this one: she knows how to make shit*/
+
+.hud {
+  background-image: url('http://wallpapercave.com/wp/AOLPCzZ.jpg');
+  background-size: 100%;
+  height: 10%;
+  width: 100vw;
+}
+
+.hud-details {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.hud-details nav {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  height: 70px;
+}
+
+.hud-details nav li {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
+}

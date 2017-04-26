@@ -1,0 +1,92 @@
+/*Global Stuff*/
+
+* {
+  margin: 0 auto;
+  font-family: 'Gloria Hallelujah', cursive;
+  color: aliceblue;
+}
+
+a {
+  color: aliceblue;
+  text-decoration: none;
+}
+
+a:visited {
+  color: azure;
+}
+
+button {
+  background-color: rgb(70, 70, 70)
+}
+
+input {
+  background-color: rgb(70, 70, 70)
+}
+
+
+/*Form Stuff*/
+
+.landing-page {
+  -ms-align-items: center;
+  align-items: center;
+  background-image: url('http://pre10.deviantart.net/206a/th/pre/i/2016/035/f/5/pokemon__somewhere_in_safari_zone_by_mark331-d9qihst.jpg');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.login-form {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 30%;
+  width: 30%;
+}
+
+.form {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 80%;
+}
+
+.form-inputs {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 2%;
+}

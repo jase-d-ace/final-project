@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import '../../styles/Form.css';
 
 class LoginForm extends Component{
 
@@ -29,13 +30,21 @@ class LoginForm extends Component{
       <div className='landing-page'>
         <Link to='/signup'>Sign Up</Link>
         <h1>Welcome to the Safari Zone!</h1>
-      <form action='/users/login' method='POST'>
-        <label>Username</label>
-        <input placeholder='username' name='user[username]' onChange={(e)=>this.handleUsernameInput(e)} />
-        <label>Password</label>
-        <input type='password' name='user[password]' placeholder='Password' onChange={(e)=>this.handlePasswordInput(e)} />
-        <input type='submit' value="Log In" />
-      </form>
+          <div className='login-form'>
+          <form className='form' action='/users/login' method='POST'>
+          <div className='form-inputs'>
+            <div className='username-input'>
+              <label>Username</label><br/>
+              <input placeholder='Username' name='user[username]' onChange={(e)=>this.handleUsernameInput(e)} />
+            </div>
+            <div className='password-input'>
+              <label>Password</label><br/>
+              <input type='password' name='user[password]' placeholder='Password' onChange={(e)=>this.handlePasswordInput(e)} />
+            </div><br/>
+          <input className='button' type='submit' value="Get Catching" />
+          </div>
+        </form>
+      </div>
     </div>
     )//end of return
   }//end of render

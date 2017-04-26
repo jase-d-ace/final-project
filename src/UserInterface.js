@@ -5,6 +5,7 @@ import App from './components/App';
 import Battle from './components/Battle';
 import ChatList from './components/ChatList';
 import Pokemon from './components/Pokemon';
+import '../styles/UI.css'
 
 class UI extends Component{
   constructor(){

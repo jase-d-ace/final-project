@@ -100,12 +100,12 @@ app.use(require('./router'));
 io.on('connection', (socket)=>{
   console.log('a user has connected');
 
-  socket.on('disconnect', ()=>{
+  socket.on('disconnect', ()=> {
     console.log('a user has disconnected');
   });
 
   socket.on('room', (data)=>{
-    console.log('joined room: ', data.room)
+    console.log(data.user+' joined room: '+data.room)
     socket.join(data.room)
   })
 

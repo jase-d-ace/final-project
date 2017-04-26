@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
-import axios from 'axios'
-import MessageWindow from './MessageWindow'
+import axios from 'axios';
+import MessageWindow from './MessageWindow';
 const socket = io();
 
 //https://socket.io/get-started/chat/
@@ -16,14 +16,13 @@ class ChatList extends Component {
     this.state = {
       //leave room for possible state stuff later
       stuffToSay: '',
-      messages: ['bullshit'],
+      messages: [],
       username: ''
     }; //end of state
   }; //end of constructor
 
   updateStuffFromSockets(payload) {
     //this is our listener for incoming messages
-    console.log('message received', payload.message)
     let newMessages = this.state.messages;
     newMessages.push(payload.message);
     this.setState({
@@ -35,7 +34,10 @@ class ChatList extends Component {
     socket.on('receive message', (payload)=>{
       this.updateStuffFromSockets(payload)
     })
-    socket.emit('room', {room: 'chat room'})
+    socket.emit('room', {
+      room: 'chat room',
+      user: this.state.username
+    })
     axios.get('/users').then((response) =>{
       this.setState({
         username: response.data.username

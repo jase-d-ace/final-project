@@ -25,11 +25,10 @@ class Pokemon extends Component {
     if (this.state.pokemon){
       if (this.state.pokemon.length >= 1){
       return this.state.pokemon.map((poke, index) =>{
-
         return (
             <div key={index} className='pokemon'>
               <h1>{poke.name.charAt(0).toUpperCase()+poke.name.slice(1)}</h1>
-              <img src={poke.sprite} />
+            <img src={poke.sprite} />
             </div>
           )
         }) //end of map given you're a user that has some pokes
