@@ -38,7 +38,7 @@ class ChatList extends Component {
       room: 'chat room',
       user: this.state.username
     })
-    axios.get('/users').then((response) =>{
+    axios.get('https://agile-temple-91762.herokuapp.com/users').then((response) =>{
       this.setState({
         username: response.data.username
       })

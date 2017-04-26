@@ -22,7 +22,7 @@ class UI extends Component{
   } //end of constructor
 
 componentDidMount(){
-  axios.get('/users').then((response) =>{
+  axios.get('https://agile-temple-91762.herokuapp.com/users').then((response) =>{
     const res = response.data;
     this.setState({
       id: res.id,
@@ -37,7 +37,7 @@ componentDidMount(){
     console.log('set User error: ', error)
   }) //end of set User
   // setInterval(()=>{
-  //   axios.put('/users/'+this.state.id,{
+  //   axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.id,{
   //     pokeballs: 0,
   //     greatballs: 0,
   //     ultraballs: 0,
