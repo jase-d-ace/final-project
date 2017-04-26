@@ -36,21 +36,21 @@ componentDidMount(){
   }).catch((error) =>{
     console.log('set User error: ', error)
   }) //end of set User
-  // setInterval(()=>{
-  //   axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.id,{
-  //     pokeballs: 0,
-  //     greatballs: 0,
-  //     ultraballs: 0,
-  //     cash: (-200),
-  //     masterballs: 0
-  //   }).then((response) =>{
-  //     this.setState({
-  //       cash: response.data.cash
-  //     })
-  //   }).catch((error) =>{
-  //     console.log('interval error:', error)
-  //   })//end of axios promise
-  // }, 300000) //end of passive income generation
+  setInterval(()=>{
+    axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.id,{
+      pokeballs: 0,
+      greatballs: 0,
+      ultraballs: 0,
+      cash: (-200),
+      masterballs: 0
+    }).then((response) =>{
+      this.setState({
+        cash: response.data.cash
+      })
+    }).catch((error) =>{
+      console.log('interval error:', error)
+    })//end of axios promise
+  }, 300000) //end of passive income generation
 }//end of componentDidMount
 
 renderUserInfo(){

@@ -57,7 +57,7 @@ class Battle extends Component {
     //if your pokemon is caught
     //run an axios call to put it in your database
     //and another axios call to give you back about 1000 bucks
-    axios.post('https://agile-temple-91762.herokuapp.com/api')('/api', {
+    axios.post('https://agile-temple-91762.herokuapp.com/api', {
       name: this.state.randomPoke.name,
       sprite: this.state.randomPoke.sprites.front_default,
       trainer_id: this.state.trainer_id
@@ -70,7 +70,7 @@ class Battle extends Component {
     //the model only accepts additions to pokeballs, and subtractions to cash.
     //since this logic lowers the balls and raises cash,
     //you need to reverse everything and make them negative
-    axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id,{
+    axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id,{
       cash: (-1000),
       pokeballs: 0,
       ultraballs: 0,
@@ -102,7 +102,7 @@ class Battle extends Component {
       })
       if (pokeCatchRate>=wildRate){
         this.caught()
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id, {
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id, {
           cash: 0,
           greatballs: 0,
           ultraballs: 0,
@@ -114,7 +114,7 @@ class Battle extends Component {
           console.log('pokeball knock-off error: ', error)
         })
       } else {
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id, {
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id, {
           cash: 0,
           greatballs: 0,
           ultraballs: 0,
@@ -148,7 +148,7 @@ class Battle extends Component {
       })
       if(greatCatchRate>=wildRate){
         this.caught()
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id,{
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id,{
           pokeballs: 0,
           cash: 0,
           ultraballs: 0,
@@ -161,7 +161,7 @@ class Battle extends Component {
         })
       } else {
         console.log('no! we missed it!')
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id,{
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id,{
           pokeballs: 0,
           cash: 0,
           ultraballs: 0,
@@ -194,7 +194,7 @@ class Battle extends Component {
       })
       if (ultraCatchRate >= wildRate){
         this.caught()
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id,{
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id,{
           cash: 0,
           pokeballs: 0,
           greatballs: 0,
@@ -206,7 +206,7 @@ class Battle extends Component {
           console.log('ultraball knock-off error:', error)
         })
       } else {
-        axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.trainer_id,{
+        axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.trainer_id,{
           cash: 0,
           pokeballs: 0,
           greatballs: 0,

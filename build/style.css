@@ -128,6 +128,32 @@ input {
 #signup-form {
   margin-top: 10%;
 }
+/*Battle Stuff*/
+
+.battle-screen {
+  -ms-align-items: center;
+  align-items: center;
+  background-image: url('http://img11.deviantart.net/56f7/i/2014/173/7/9/kanto_safari_zone___dusk_by_falke2009-d5f8xsc.png');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.wild-pokemon img {
+  height: 200px;
+  width: 200px;
+}
+
+.poke-name-span {
+  color: darkslategray;
+  font-size: 25px;
+}
 .pokemon-container {
   background-image: url('https://s-media-cache-ak0.pinimg.com/originals/df/4e/8b/df4e8ba28f912bf9cdf9fa0dfc196411.png');
   background-size: cover;
@@ -150,6 +176,68 @@ input {
   -ms-flex-direction: column;
   flex-direction: column;
   margin: 0 5%;
+}
+/*Shop Stuff*/
+
+.shop-container {
+  background-image: url('https://cdna.artstation.com/p/assets/images/images/003/701/294/large/jessika-salenson-pokemon-shop-ingameview.jpg?1476607218');
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+.shop-holder {
+  -ms-align-items: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 40%;
+}
+
+.shop-holder ul {
+  padding: 0;
+}
+
+.shop-holder ul li {
+  list-style: none;
+}
+
+.shop {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+}
+
+.shop p {
+  margin: 0;
+}
+
+.ball {
+  margin: 0;
 }
 /*Message Window Stuff*/
 

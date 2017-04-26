@@ -63,7 +63,7 @@ class Shop extends Component{
     console.log('net')
     console.log(this.state.cash-total)
     if(this.state.cash>=total){
-      axios.put('https://agile-temple-91762.herokuapp.com/users/')'+this.state.id, {
+      axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.id, {
         pokeballs: this.state.pokeballsInCart,
         greatballs: this.state.greatballsInCart,
         ultraballs: this.state.ultraballsInCart,
