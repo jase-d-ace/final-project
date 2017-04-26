@@ -100,15 +100,12 @@ app.use(require('./router'));
 io.on('connection', (socket)=>{
   console.log('a user has connected');
 
-  socket.on('chat message', (msg) =>{
-    console.log('message: ', msg)
-  })
-
   socket.on('disconnect', ()=>{
     console.log('a user has disconnected');
   });
 
   socket.on('room', (data)=>{
+    console.log('joined room: ', data.room)
     socket.join(data.room)
   })
 
@@ -117,7 +114,9 @@ io.on('connection', (socket)=>{
   })
 
   socket.on('speaking event', (data)=>{
-    socket.broadcast.to(data.room).emit('receive message', data)
+    console.log('message:', data.message)
+    console.log('speaking event data', data)
+    socket.emit('receive message', data)
   })
 
 }); //end of socket generate

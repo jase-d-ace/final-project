@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
+import axios from 'axios'
+import MessageWindow from './MessageWindow'
 const socket = io();
 
 //https://socket.io/get-started/chat/
@@ -13,21 +15,32 @@ class ChatList extends Component {
     super();
     this.state = {
       //leave room for possible state stuff later
-      stuffToSay: ''
+      stuffToSay: '',
+      messages: ['bullshit'],
+      username: ''
     }; //end of state
-    socket.on('receive message', (payload)=>{
-      this.updateStuffFromSockets(payload)
-    })
   }; //end of constructor
 
-  updateStuffFromSockets(payload) =>{
+  updateStuffFromSockets(payload) {
+    //this is our listener for incoming messages
+    console.log('message received', payload.message)
+    let newMessages = this.state.messages;
+    newMessages.push(payload.message);
     this.setState({
-      stuffToSay: payload.message
+      messages: newMessages
     })
   }
 
   componentDidMount(){
+    socket.on('receive message', (payload)=>{
+      this.updateStuffFromSockets(payload)
+    })
     socket.emit('room', {room: 'chat room'})
+    axios.get('/users').then((response) =>{
+      this.setState({
+        username: response.data.username
+      })
+    })
   }//end of component did mount
 
   componentWillUnmount(){
@@ -36,17 +49,34 @@ class ChatList extends Component {
     })
   }
 
-  sayStuff(text){
-    this.setState({
-      stuffToSay: text
-    });
+  sayStuff(){
+    //this is what we're gonna use onSubmit
+    //this will emit the event
     socket.emit('speaking event', {
       room: 'chat room',
-      message: text
+      message: this.state.stuffToSay
     })//end of socket.emit
   }//end of sayStuff
 
+  handleInput(e){
+    this.setState({
+      stuffToSay: e.target.value
+    })
+  }
 
+//we need a window to display all of these messages
+//<MessageWindow messages={this.state.messages} username={this.state.username} />
+render(){
+  console.log(this.state.stuffToSay)
+  console.log(this.state.messages)
+  return (
+    <div className='chat-window'>
+      <MessageWindow messages={this.state.messages} username={this.state.username} />
+      <input type='text' onChange={(e)=>this.handleInput(e)} />
+      <button onClick={()=>this.sayStuff()}>Say Stuff</button>
+    </div>
+  );
+};
 
 };//end of class
 export default ChatList;
