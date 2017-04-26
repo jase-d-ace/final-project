@@ -9721,6 +9721,8 @@ var _axios2 = _interopRequireDefault(_axios);
 
 var _reactRouterDom = __webpack_require__(27);
 
+__webpack_require__(321);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -9767,7 +9769,7 @@ var Pokemon = function (_Component) {
               'div',
               { key: index, className: 'pokemon' },
               _react2.default.createElement(
-                'h1',
+                'h2',
                 null,
                 poke.name.charAt(0).toUpperCase() + poke.name.slice(1)
               ),
@@ -16114,10 +16116,11 @@ var Battle = function (_Component) {
               ' Ultra Balls Thrown'
             ),
             _react2.default.createElement(
-              'p',
-              null,
+              'span',
+              { className: 'poke-name-span' },
               this.state.randomPoke.name
             ),
+            _react2.default.createElement('br', null),
             _react2.default.createElement('img', { src: this.state.randomPoke.sprites.front_default })
           ),
           _react2.default.createElement(
@@ -16180,7 +16183,7 @@ var Battle = function (_Component) {
         _react2.default.createElement(
           'h1',
           null,
-          'BITCHES'
+          'Catch A New Pokemon?'
         ),
         _react2.default.createElement(
           'button',
@@ -39472,6 +39475,12 @@ _reactDom2.default.render(_router2.default, document.getElementById('root'));
 
 /***/ }),
 /* 320 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 321 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

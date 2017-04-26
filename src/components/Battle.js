@@ -232,7 +232,7 @@ class Battle extends Component {
           <p>{this.state.pokeballsThrown} Pokeballs Thrown</p>
           <p>{this.state.greatballsThrown} Great Balls Thrown</p>
           <p>{this.state.ultraballsThrown} Ultra Balls Thrown</p>
-          <p>{this.state.randomPoke.name}</p>
+          <span className='poke-name-span'>{this.state.randomPoke.name}</span><br/>
           <img src={this.state.randomPoke.sprites.front_default} />
         </div>
           <div className='battle-hud'>
@@ -253,7 +253,7 @@ class Battle extends Component {
   render(){
     return(
       <div className='battle-screen'>
-        <h1>BITCHES</h1>
+        <h1>Catch A New Pokemon?</h1>
         <button onClick={() => this.getRandomPoke()}>Find!</button>
         {this.renderWild()}
       </div>

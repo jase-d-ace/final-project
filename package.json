@@ -33,6 +33,7 @@
     "pg-promise": "^5.6.7",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-notify": "^2.0.1",
     "react-router-dom": "^4.1.1",
     "socket.io": "^1.7.3"
   },

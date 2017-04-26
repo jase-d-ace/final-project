@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import '../../styles/Pokemon.css'
 
 class Pokemon extends Component {
 
@@ -27,7 +28,7 @@ class Pokemon extends Component {
       return this.state.pokemon.map((poke, index) =>{
         return (
             <div key={index} className='pokemon'>
-              <h1>{poke.name.charAt(0).toUpperCase()+poke.name.slice(1)}</h1>
+              <h2>{poke.name.charAt(0).toUpperCase()+poke.name.slice(1)}</h2>
             <img src={poke.sprite} />
             </div>
           )

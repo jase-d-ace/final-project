@@ -126,6 +126,34 @@ input {
   height: 200px;
   width: 200px;
 }
+
+.poke-name-span {
+  color: darkslategray;
+  font-size: 25px;
+}
+.pokemon-container {
+  background-image: url('https://s-media-cache-ak0.pinimg.com/originals/df/4e/8b/df4e8ba28f912bf9cdf9fa0dfc196411.png');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-flow: row wrap;
+  height: 100vh;
+  overflow-y: auto;
+  width: 100vw;
+}
+
+.pokemon {
+  -ms-align-items: center;
+  align-items: center;
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  margin: 0 5%;
+}
 /*Shop Stuff*/
 
 .shop-container {

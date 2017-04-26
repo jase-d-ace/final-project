@@ -19,3 +19,8 @@
   height: 200px;
   width: 200px;
 }
+
+.poke-name-span {
+  color: darkslategray;
+  font-size: 25px;
+}
