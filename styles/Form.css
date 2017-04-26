@@ -97,3 +97,26 @@ input {
   flex-direction: column;
   margin: 2%;
 }
+
+.form-container {
+  -ms-align-items: center;
+  align-items: center;
+  background-image: url('http://vignette1.wikia.nocookie.net/pokemon/images/4/4d/Oak.PNG/revision/latest?cb=20110319045920');
+  background-size: cover;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  -o-flex-direction: column;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+}
+
+#signup-form {
+  margin-top: 10%;
+}

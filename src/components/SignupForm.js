@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import '../../styles/Form.css'
+import '../../styles/Form.css';
 
 class SignupForm extends Component {
 
@@ -33,17 +33,22 @@ class SignupForm extends Component {
   render(){
     return(
     <div className='form-container'>
-      <form action='/users' method='POST'>
+    <h1>Welcome, Trainer! Tell us about yourself</h1>
+      <div className='login-form' id='signup-form'>
+      <form className='form' action='/users' method='POST'>
+      <div className='form-inputs'>
         <div className='username-input'>
-          <label>Enter Your Username</label>
+          <label>Enter Your Username</label><br />
           <input type='text' placeholder='Username' onChange={(e)=>this.handleUsernameInput(e)} id="username" name='user[username]' />
         </div>
-        <div className='password-input'>
-          <label>Enter Your Password</label>
+        <div className='password-input'><br />
+          <label>Enter Your Password</label><br />
           <input type='password' id='password' name='user[password]' placeholder='Your password' onChange={(e)=>this.handlePasswordInput(e)} />
         </div>
-        <input class='button' type='submit' value="Sign Up" />
+      </div><br />
+        <input className='button' type='submit' value="Sign Up" />
       </form>
+    </div>
     </div>
     )//end of return
   }//end of render
