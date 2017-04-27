@@ -22,7 +22,7 @@ class Shop extends Component{
   }//end of constructor
 
   componentDidMount(){
-    axios.get('https://agile-temple-91762.herokuapp.com/users').then((response) =>{
+    axios.get('https://safari-zone.herokuapp.com/users').then((response) =>{
       const res = response.data
       console.log(res)
       this.setState({
@@ -63,7 +63,7 @@ class Shop extends Component{
     console.log('net')
     console.log(this.state.cash-total)
     if(this.state.cash>=total){
-      axios.put('https://agile-temple-91762.herokuapp.com/users/'+this.state.id, {
+      axios.put('https://safari-zone.herokuapp.com/users/'+this.state.id, {
         pokeballs: this.state.pokeballsInCart,
         greatballs: this.state.greatballsInCart,
         ultraballs: this.state.ultraballsInCart,

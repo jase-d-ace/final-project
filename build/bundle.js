@@ -15759,7 +15759,7 @@ var Battle = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('https://agile-temple-91762.herokuapp.com/users').then(function (response) {
+      _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
         var res = response.data;
         _this2.setState({
           trainer_id: res.id,
@@ -15796,7 +15796,7 @@ var Battle = function (_Component) {
       //if your pokemon is caught
       //run an axios call to put it in your database
       //and another axios call to give you back about 1000 bucks
-      _axios2.default.post('https://agile-temple-91762.herokuapp.com/api', {
+      _axios2.default.post('https://safari-zone.herokuapp.com/api', {
         name: this.state.randomPoke.name,
         sprite: this.state.randomPoke.sprites.front_default,
         trainer_id: this.state.trainer_id
@@ -15809,7 +15809,7 @@ var Battle = function (_Component) {
       //the model only accepts additions to pokeballs, and subtractions to cash.
       //since this logic lowers the balls and raises cash,
       //you need to reverse everything and make them negative
-      _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+      _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
         cash: -1000,
         pokeballs: 0,
         ultraballs: 0,
@@ -15843,7 +15843,7 @@ var Battle = function (_Component) {
         });
         if (pokeCatchRate >= wildRate) {
           this.caught();
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             cash: 0,
             greatballs: 0,
             ultraballs: 0,
@@ -15855,7 +15855,7 @@ var Battle = function (_Component) {
             console.log('pokeball knock-off error: ', error);
           });
         } else {
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             cash: 0,
             greatballs: 0,
             ultraballs: 0,
@@ -15894,7 +15894,7 @@ var Battle = function (_Component) {
         });
         if (greatCatchRate >= wildRate) {
           this.caught();
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             pokeballs: 0,
             cash: 0,
             ultraballs: 0,
@@ -15907,7 +15907,7 @@ var Battle = function (_Component) {
           });
         } else {
           console.log('no! we missed it!');
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             pokeballs: 0,
             cash: 0,
             ultraballs: 0,
@@ -15941,7 +15941,7 @@ var Battle = function (_Component) {
         });
         if (ultraCatchRate >= wildRate) {
           this.caught();
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             cash: 0,
             pokeballs: 0,
             greatballs: 0,
@@ -15953,7 +15953,7 @@ var Battle = function (_Component) {
             console.log('ultraball knock-off error:', error);
           });
         } else {
-          _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.trainer_id, {
+          _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.trainer_id, {
             cash: 0,
             pokeballs: 0,
             greatballs: 0,
@@ -38573,7 +38573,7 @@ var UI = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('https://agile-temple-91762.herokuapp.com/users').then(function (response) {
+      _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
         var res = response.data;
         _this2.setState({
           id: res.id,
@@ -38588,7 +38588,7 @@ var UI = function (_Component) {
         console.log('set User error: ', error);
       }); //end of set User
       setInterval(function () {
-        _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + _this2.state.id, {
+        _axios2.default.put('https://safari-zone.herokuapp.com/users/' + _this2.state.id, {
           pokeballs: 0,
           greatballs: 0,
           ultraballs: 0,
@@ -38778,7 +38778,7 @@ var ChatList = function (_Component) {
         room: 'chat room',
         user: this.state.username
       });
-      _axios2.default.get('https://agile-temple-91762.herokuapp.com/users').then(function (response) {
+      _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
         _this2.setState({
           username: response.data.username
         });
@@ -39152,7 +39152,7 @@ var Shop = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('https://agile-temple-91762.herokuapp.com/users').then(function (response) {
+      _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
         var res = response.data;
         console.log(res);
         _this2.setState({
@@ -39200,7 +39200,7 @@ var Shop = function (_Component) {
       console.log('net');
       console.log(this.state.cash - total);
       if (this.state.cash >= total) {
-        _axios2.default.put('https://agile-temple-91762.herokuapp.com/users/' + this.state.id, {
+        _axios2.default.put('https://safari-zone.herokuapp.com/users/' + this.state.id, {
           pokeballs: this.state.pokeballsInCart,
           greatballs: this.state.greatballsInCart,
           ultraballs: this.state.ultraballsInCart,
