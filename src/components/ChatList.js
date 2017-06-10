@@ -17,8 +17,7 @@ class ChatList extends Component {
       //leave room for possible state stuff later
       stuffToSay: '',
       messages: [],
-      username: '',
-      lastUser: ''
+      username: ''
     }; //end of state
   }; //end of constructor
 
@@ -27,8 +26,7 @@ class ChatList extends Component {
     let newMessages = this.state.messages;
     newMessages.push(payload.message);
     this.setState({
-      messages: newMessages,
-      lastUser: payload.user
+      messages: newMessages
     })
   }
 
@@ -75,7 +73,7 @@ render(){
   console.log(this.state.messages)
   return (
     <div className='chat-window'>
-      <MessageWindow messages={this.state.messages} username={this.state.username} lastUser={this.state.lastUser} />
+      <MessageWindow messages={this.state.messages} username={this.state.username} />
       <input type='text' onChange={(e)=>this.handleInput(e)} />
       <button onClick={()=>this.sayStuff()}>Say Stuff</button>
     </div>

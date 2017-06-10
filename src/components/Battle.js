@@ -27,7 +27,7 @@ class Battle extends Component {
   }//end of constructor
 
   componentDidMount(){
-    axios.get('http://localhost:3000/users').then((response) =>{
+    axios.get('https://safari-zone.herokuapp.com/users').then((response) =>{
       const res = response.data
       this.setState({
         trainer_id: res.id,

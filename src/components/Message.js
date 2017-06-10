@@ -3,7 +3,7 @@ import '../../styles/Messages.css'
 
 const Message = (props) =>{
   return (
-    <li><span>{props.lastUser}</span><p>{props.message}</p></li>
+    <li><span>{props.username}</span><p>{props.message}</p></li>
   )
 }
 
