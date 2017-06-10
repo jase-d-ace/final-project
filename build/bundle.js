@@ -15759,7 +15759,7 @@ var Battle = function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
+      _axios2.default.get('http://localhost:3000/users').then(function (response) {
         var res = response.data;
         _this2.setState({
           trainer_id: res.id,
@@ -38575,6 +38575,7 @@ var UI = function (_Component) {
 
       _axios2.default.get('https://safari-zone.herokuapp.com/users').then(function (response) {
         var res = response.data;
+        console.log(res);
         _this2.setState({
           id: res.id,
           username: res.username,
@@ -38749,7 +38750,8 @@ var ChatList = function (_Component) {
       //leave room for possible state stuff later
       stuffToSay: '',
       messages: [],
-      username: ''
+      username: '',
+      lastUser: ''
     }; //end of state
     return _this;
   }
@@ -38763,7 +38765,8 @@ var ChatList = function (_Component) {
       var newMessages = this.state.messages;
       newMessages.push(payload.message);
       this.setState({
-        messages: newMessages
+        messages: newMessages,
+        lastUser: payload.user
       });
     }
   }, {
@@ -38824,7 +38827,7 @@ var ChatList = function (_Component) {
       return _react2.default.createElement(
         'div',
         { className: 'chat-window' },
-        _react2.default.createElement(_MessageWindow2.default, { messages: this.state.messages, username: this.state.username }),
+        _react2.default.createElement(_MessageWindow2.default, { messages: this.state.messages, username: this.state.username, lastUser: this.state.lastUser }),
         _react2.default.createElement('input', { type: 'text', onChange: function onChange(e) {
             return _this3.handleInput(e);
           } }),
@@ -39003,7 +39006,7 @@ var Message = function Message(props) {
     _react2.default.createElement(
       'span',
       null,
-      props.username
+      props.lastUser
     ),
     _react2.default.createElement(
       'p',
@@ -39062,7 +39065,7 @@ var MessageWindow = function (_Component) {
 
       if (this.props.messages.length >= 1) {
         return this.props.messages.map(function (message, index) {
-          return _react2.default.createElement(_Message2.default, { key: index, username: _this2.props.username, index: index, message: message });
+          return _react2.default.createElement(_Message2.default, { key: index, lastUser: _this2.props.lastUser, index: index, message: message });
         });
       } else {
         return _react2.default.createElement(

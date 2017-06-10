@@ -24,6 +24,7 @@ class UI extends Component{
 componentDidMount(){
   axios.get('https://safari-zone.herokuapp.com/users').then((response) =>{
     const res = response.data;
+    console.log(res)
     this.setState({
       id: res.id,
       username: res.username,
